@@ -4,6 +4,7 @@ import Inputs from "./Inputs";
 import Timer from "./Timer";
 import Tasks from "./tasks";
 import styled from "styled-components";
+// @ts-ignore
 import Colors from "../utilities/commonCss/colors";
 
 const ContainerMain = styled.main`
@@ -11,17 +12,20 @@ const ContainerMain = styled.main`
   color: ${Colors.primaryYellow};
   background-color: ${Colors.primaryBG};
   height: 100%;
+  padding-top: 4rem;
 `;
 const Container = styled.section`
   width: 500px;
   margin: auto;
+  display: flex;
+  gap: 4rem;
+  flex-direction: column;
 `;
 
 export default () => {
   return (
     <ContainerMain>
       <Container>
-        Main
         <Navbar />
         <Inputs />
         <Timer />
