@@ -25,6 +25,8 @@ const Container = styled.section`
   display: flex;
   gap: 4rem;
   flex-direction: column;
+  position: relative;
+  z-index: 100;
 `;
 
 export default () => {
@@ -33,15 +35,15 @@ export default () => {
       <Box sx={{ position: "absolute", top: "0px" }}>
         <img src={Blob1} alt="" />
       </Box>
-      <Box sx={{ position: "absolute", bottom: "0px", right: "0px" }}>
-        <img src={Blob2} alt="" />
-      </Box>
       <Container>
         <Navbar />
         <Inputs />
         <Timer />
         <Tasks />
       </Container>
+      <Box sx={{ position: "absolute", bottom: "0px", right: "0px" }}>
+        <img src={Blob2} alt="" />
+      </Box>
     </ContainerMain>
   );
 };
