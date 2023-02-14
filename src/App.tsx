@@ -1,5 +1,6 @@
 import "./App.css";
 import Main from "./components";
+import "@tremor/react/dist/esm/tremor.css";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./navbar";
 import Inputs from "./Inputs";
 import Timer from "./Timer";
@@ -9,6 +9,7 @@ import Colors from "../utilities/commonCss/colors";
 import { Box } from "@mui/material";
 import Blob1 from "../assets/Blob1.svg";
 import Blob2 from "../assets/Blob2.svg";
+import Graps from "./graphs";
 
 const ContainerMain = styled.main`
   text-align: center;
@@ -30,16 +31,25 @@ const Container = styled.section`
 `;
 
 export default () => {
+  const [graph, setGraph] = useState(false);
   return (
     <ContainerMain>
       <Box sx={{ position: "absolute", top: "0px" }}>
         <img src={Blob1} alt="" />
       </Box>
       <Container>
-        <Navbar />
-        <Inputs />
-        <Timer />
-        <Tasks />
+        <Navbar setGraph={setGraph} graph={graph} />
+        {graph ? (
+          <>
+            <Graps />
+          </>
+        ) : (
+          <>
+            <Inputs />
+            <Timer />
+            <Tasks />
+          </>
+        )}
       </Container>
       <Box sx={{ position: "absolute", bottom: "0px", right: "0px" }}>
         <img src={Blob2} alt="" />

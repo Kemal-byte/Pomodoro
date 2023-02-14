@@ -4,10 +4,18 @@ import Gear from "../../assets/Gear.svg";
 import ChartPie from "../../assets/ChartPie.svg";
 import Profile from "../../assets/Profile.svg";
 
-export default () => {
+type Props = {
+  graph: boolean;
+  setGraph: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default ({ graph, setGraph }: Props) => {
+  const handleGraph = () => {
+    setGraph(!graph);
+  };
   return (
     <Navbar>
-      <NavItems>
+      <NavItems onClick={handleGraph}>
         <img src={ChartPie} alt="" />
       </NavItems>
       <NavItems>
