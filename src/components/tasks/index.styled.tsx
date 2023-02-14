@@ -8,6 +8,8 @@ const TaskContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 22px;
+  overflow: auto;
+  max-height: 232px;
 `;
 export const Task = styled.input`
   width: 400px;
@@ -21,6 +23,7 @@ export const Task = styled.input`
   line-height: 23px;
   border-radius: 5px;
   border: none;
+
   &:hover {
     outline: 1px solid #fff;
   }

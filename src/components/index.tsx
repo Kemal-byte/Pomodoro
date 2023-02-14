@@ -6,6 +6,8 @@ import Tasks from "./tasks";
 import styled from "styled-components";
 // @ts-ignore
 import Colors from "../utilities/commonCss/colors";
+import { Box } from "@mui/material";
+import Blob1 from "../assets/Blob1.svg";
 
 const ContainerMain = styled.main`
   text-align: center;
@@ -13,6 +15,8 @@ const ContainerMain = styled.main`
   background-color: ${Colors.primaryBG};
   height: 100%;
   padding-top: 4rem;
+  position: relative;
+  overflow: hidden;
 `;
 const Container = styled.section`
   width: 500px;
@@ -25,6 +29,9 @@ const Container = styled.section`
 export default () => {
   return (
     <ContainerMain>
+      <Box sx={{ position: "absolute", top: "0px" }}>
+        <img src={Blob1} alt="" />
+      </Box>
       <Container>
         <Navbar />
         <Inputs />
