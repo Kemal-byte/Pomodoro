@@ -12,21 +12,6 @@ const theme = createTheme({
       primary: "#fff",
     },
   },
-  components: {
-    MuiTextField: {
-      variants: [
-        {
-          props: { variant: "filled" },
-          style: {
-            style: {
-              border: "2px solid #fff",
-              color: "red",
-            },
-          },
-        },
-      ],
-    },
-  },
 });
 function App() {
   return (
