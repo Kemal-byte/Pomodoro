@@ -1,0 +1,12 @@
+.textfield__label {
+  color: #fff !important;
+  border-color: #fff !important;
+  outline-color: #fff !important;
+  background-color: rgb(6, 6, 6) !important;
+  width: 90px !important;
+  border-radius: 5px !important;
+}
+.input__container {
+  display: flex !important;
+  justify-content: space-around;
+}
