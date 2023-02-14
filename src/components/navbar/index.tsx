@@ -11,8 +11,9 @@ type Props = {
 
 export default ({ graph, setGraph }: Props) => {
   const handleGraph = () => {
-    setGraph(!graph);
+    setGraph((graph) => !graph);
   };
+
   return (
     <Navbar>
       <NavItems onClick={handleGraph}>
