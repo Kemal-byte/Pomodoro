@@ -8,6 +8,7 @@ import styled from "styled-components";
 import Colors from "../utilities/commonCss/colors";
 import { Box } from "@mui/material";
 import Blob1 from "../assets/Blob1.svg";
+import Blob2 from "../assets/Blob2.svg";
 
 const ContainerMain = styled.main`
   text-align: center;
@@ -31,6 +32,9 @@ export default () => {
     <ContainerMain>
       <Box sx={{ position: "absolute", top: "0px" }}>
         <img src={Blob1} alt="" />
+      </Box>
+      <Box sx={{ position: "absolute", bottom: "0px", right: "0px" }}>
+        <img src={Blob2} alt="" />
       </Box>
       <Container>
         <Navbar />
