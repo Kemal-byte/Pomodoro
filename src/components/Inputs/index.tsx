@@ -10,6 +10,8 @@ export default () => {
         label="Sets"
         id="outlined-size-normal"
         defaultValue=""
+        type="number"
+        inputProps={{ min: 0, max: 60 }}
         className="textfield__label"
         InputLabelProps={{ className: "textfield__label" }}
       />
@@ -17,6 +19,8 @@ export default () => {
         label="Break"
         id="outlined-size-normal"
         defaultValue=""
+        type="number"
+        inputProps={{ min: 0, max: 10 }}
         className="textfield__label"
         InputLabelProps={{ className: "textfield__label" }}
       />

@@ -39,6 +39,8 @@ const reducer = (state: typeof initialState, action: ACTIONTYPE) => {
         ...state,
         tags: action.payload,
       };
+    default:
+      throw new Error();
   }
 };
 export default reducer;
