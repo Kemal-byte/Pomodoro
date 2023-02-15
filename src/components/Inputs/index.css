@@ -1,4 +1,4 @@
-.textfield__label {
+.MuiOutlinedInput-input {
   color: #fff !important;
   border-color: #fff !important;
   outline-color: #fff !important;
@@ -6,6 +6,11 @@
   width: 90px !important;
   border-radius: 5px !important;
 }
+
+.textfield__label {
+  color: #fff !important;
+}
+
 .input__container {
   display: flex !important;
   justify-content: space-around;

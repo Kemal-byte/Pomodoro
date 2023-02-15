@@ -7,7 +7,7 @@ type InitialState = {
 };
 
 export const initialState: InitialState = {
-  sets: 0,
+  sets: 1,
   break: 0,
   timer: 25,
 };
