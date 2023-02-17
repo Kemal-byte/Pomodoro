@@ -1,8 +1,9 @@
 import "./App.css";
 import Main from "./components";
 import "@tremor/react/dist/esm/tremor.css";
-
+import "react-toastify/dist/ReactToastify.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ToastContainer } from "react-toastify";
 
 const theme = createTheme({
   palette: {
@@ -18,6 +19,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Main />
+      <ToastContainer />
     </ThemeProvider>
   );
 }

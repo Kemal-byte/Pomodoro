@@ -1,11 +1,15 @@
+import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 import { TextField } from "@mui/material";
 import React, { useReducer } from "react";
-import reducer, { initialState } from "../../reducer/reducer";
+
 import Colors from "../../utilities/commonCss/colors";
 import "./index.css";
 
-export default () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+export default ({ state, dispatch }) => {
+  const handleChange = (tip: string, val: any) => {
+    console.log(state);
+    dispatch({ type: tip, payload: val });
+  };
   return (
     <div className="input__container">
       <TextField
@@ -13,21 +17,19 @@ export default () => {
         error={state.sets > 60 || state.sets < 1 ? true : false}
         helperText={(state.sets > 60 || state.sets < 1) && "1-60"}
         id="outlined-size-normal"
-        defaultValue=""
         type="number"
         value={state.sets}
         inputProps={{ min: 1, max: 60 }}
         className="textfield__label"
         InputLabelProps={{ className: "textfield__label" }}
         onChange={(e) =>
-          dispatch({ type: "numberOf_reps", payload: Number(e.target.value) })
+          handleChange("numberOf_reps", parseInt(e.target.value))
         }
       />
       <TextField
         label="Break"
         id="outlined-size-normal"
-        value={state.break}
-        defaultValue=""
+        value={state.break || 0}
         type="number"
         error={state.break > 60 || state.break < 0 ? true : false}
         helperText={(state.break > 60 || state.break < 0) && "1-60"}
@@ -35,7 +37,7 @@ export default () => {
         className="textfield__label"
         InputLabelProps={{ className: "textfield__label" }}
         onChange={(e) =>
-          dispatch({ type: "duration_breaks", payload: Number(e.target.value) })
+          handleChange("duration_breaks", parseInt(e.target.value))
         }
       />
       <TextField
@@ -43,16 +45,10 @@ export default () => {
         id="outlined-size-normal"
         error={state.tags && state.tags?.length > 14 ? true : false}
         helperText={state.tags && state.tags?.length > 14 && "max 14 char."}
-        value={state.tags}
-        defaultValue=""
+        value={state.tags || ""}
         className="textfield__label"
         InputLabelProps={{ className: "textfield__label" }}
-        onChange={(e) =>
-          dispatch({
-            type: "naming_tag",
-            payload: e.target.value.toUpperCase(),
-          })
-        }
+        onChange={(e) => handleChange("naming_tag", e.target.value)}
       />
     </div>
   );

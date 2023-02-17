@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import Navbar from "./navbar";
 import Inputs from "./Inputs";
 import Timer from "./Timer";
@@ -10,6 +10,7 @@ import { Box } from "@mui/material";
 import Blob1 from "../assets/Blob1.svg";
 import Blob2 from "../assets/Blob2.svg";
 import Graps from "./graphs";
+import reducer, { initialState } from "../reducer/reducer";
 
 const ContainerMain = styled.main`
   text-align: center;
@@ -36,6 +37,7 @@ const Container = styled.section`
 
 export default () => {
   const [graph, setGraph] = useState(false);
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <ContainerMain>
       <Box
@@ -56,8 +58,8 @@ export default () => {
           </>
         ) : (
           <>
-            <Inputs />
-            <Timer />
+            <Inputs state={state} dispatch={dispatch} />
+            <Timer state={state} dispatch={dispatch} />
             <Tasks />
           </>
         )}

@@ -11,13 +11,13 @@ export const initialState: InitialState = {
   break: 0,
   timer: 25,
 };
-type ACTIONTYPE =
+export type ACTIONTYPE =
   | { type: "setting_timer"; payload: number }
   | { type: "duration_breaks"; payload: number }
   | { type: "numberOf_reps"; payload: number }
   | { type: "naming_tag"; payload: string };
 
-const reducer = (state: typeof initialState, action: ACTIONTYPE) => {
+const reducer = (state: InitialState = initialState, action: any) => {
   switch (action.type) {
     case "setting_timer":
       return {
