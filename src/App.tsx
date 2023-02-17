@@ -12,6 +12,7 @@ const theme = createTheme({
     },
     text: {
       primary: "#fff",
+      disabled: "red",
     },
   },
 });

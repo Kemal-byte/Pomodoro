@@ -7,7 +7,7 @@ export default ({ state, dispatch }) => {
   const { NotifyError, NotifySuccess } = ToastifyNotification();
   const [start, setStart] = useState(false);
   const [remainingTime, setRemainingTime] = useState(state.timer * 60);
-
+  console.log(state);
   /**
    * After the state timer has changed we update our state.
    * setState is Async call so it was following one step back.
@@ -21,14 +21,14 @@ export default ({ state, dispatch }) => {
    * Starts the timer and clears the setTimer on pause.
    */
   useEffect(() => {
-    if (!start) return;
+    if (!state.started) return;
     const intervalId = setInterval(() => {
       setRemainingTime((prev) => prev - 1);
-      console.log(start);
+      console.log(state.started);
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [start]);
+  }, [state.started]);
 
   /**
    * A function that changes the timer in useReducer by using dispatch
@@ -71,7 +71,8 @@ export default ({ state, dispatch }) => {
     console.log("Start Clickeds");
     console.log(state);
     checkInputs();
-    setStart(!start);
+    dispatch({ type: "started_timer", payload: !state.started });
+    // setStart(!start);
   };
   const minutes = Math.floor(remainingTime / 60);
   const seconds = remainingTime % 60;
@@ -93,7 +94,9 @@ export default ({ state, dispatch }) => {
           onChange={(e) => handleChange(e)}
         />
       </Box>
-      <TimerStart onClick={handleStart}>{start ? "Pause" : "Start"}</TimerStart>
+      <TimerStart onClick={handleStart}>
+        {state.started ? "Pause" : "Start"}
+      </TimerStart>
     </TimerContainer>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import Navbar from "./navbar";
 import Inputs from "./Inputs";
 import Timer from "./Timer";
@@ -36,8 +36,17 @@ const Container = styled.section`
 `;
 
 export default () => {
+  let localState = JSON.parse(localStorage.getItem("myState"));
   const [graph, setGraph] = useState(false);
-  const [state, dispatch] = useReducer(reducer, initialState);
+  let [state, dispatch] = useReducer(reducer, localState || initialState);
+
+  /**
+   * When the initial state is changed, we are updating the local storage.
+   */
+  useEffect(() => {
+    localStorage.setItem("myState", JSON.stringify(state));
+  }, [state]);
+
   return (
     <ContainerMain>
       <Box

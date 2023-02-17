@@ -18,8 +18,9 @@ export default ({ state, dispatch }) => {
         helperText={(state.sets > 60 || state.sets < 1) && "1-60"}
         id="outlined-size-normal"
         type="number"
+        disabled={state.started}
         value={state.sets}
-        inputProps={{ min: 1, max: 60 }}
+        inputProps={{ min: 1, max: 60, readOnly: true }}
         className="textfield__label"
         InputLabelProps={{ className: "textfield__label" }}
         onChange={(e) =>
@@ -30,6 +31,7 @@ export default ({ state, dispatch }) => {
         label="Break"
         id="outlined-size-normal"
         value={state.break || 0}
+        disabled={false}
         type="number"
         error={state.break > 60 || state.break < 0 ? true : false}
         helperText={(state.break > 60 || state.break < 0) && "1-60"}
@@ -44,10 +46,11 @@ export default ({ state, dispatch }) => {
         label="Tags"
         id="outlined-size-normal"
         error={state.tags && state.tags?.length > 14 ? true : false}
-        helperText={state.tags && state.tags?.length > 14 && "max 14 char."}
+        helperText={state.tags && state.tags?.length > 10 && "max 10 char."}
         value={state.tags || ""}
         className="textfield__label"
         InputLabelProps={{ className: "textfield__label" }}
+        inputProps={{ maxLength: 10 }}
         onChange={(e) => handleChange("naming_tag", e.target.value)}
       />
     </div>
