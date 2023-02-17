@@ -8,28 +8,42 @@ export default ({ state, dispatch }) => {
   const [start, setStart] = useState(false);
   const [remainingTime, setRemainingTime] = useState(state.timer * 60);
 
+  /**
+   * After the state timer has changed we update our state.
+   * setState is Async call so it was following one step back.
+   * This fixes it.
+   */
   useEffect(() => {
     setRemainingTime(state.timer * 60);
   }, [state.timer]);
 
+  /**
+   * Starts the timer and clears the setTimer on pause.
+   */
   useEffect(() => {
     if (!start) return;
     const intervalId = setInterval(() => {
-      // console.log("ah");
-      // dispatch({ type: "setting_timer", payload: state.timer - 1 });
       setRemainingTime((prev) => prev - 1);
-      // console.log(remainingTime);
       console.log(start);
     }, 1000);
 
     return () => clearInterval(intervalId);
   }, [start]);
 
+  /**
+   * A function that changes the timer in useReducer by using dispatch
+   * @param e
+   */
   const handleChange = (e: any) => {
     if (e !== null) {
       dispatch({ type: "setting_timer", payload: Number(e.target.value) });
     }
   };
+  /**
+   * Value checker of the timer before starting the timer
+   * @function checkInputs
+   * @returns {void}
+   */
   const checkInputs = () => {
     if (state.sets < 1 || state.sets > 60 || Number.isNaN(state.sets)) {
       NotifyError("Invalid Set input, pick between 1 and 60");
@@ -48,6 +62,11 @@ export default ({ state, dispatch }) => {
       return;
     }
   };
+  /**
+   * Toggles start state.
+   * Before toggling the setState it call input checker function.
+   * @see {@link checkInputs}
+   */
   const handleStart = () => {
     console.log("Start Clickeds");
     console.log(state);
@@ -61,9 +80,7 @@ export default ({ state, dispatch }) => {
     .padStart(2, "0")}`;
   return (
     <TimerContainer>
-      {start || <Timer>{state.timer}:00</Timer>}
-      {start && <Timer>{fomattedTime}</Timer>}
-
+      <Timer>{fomattedTime}</Timer>
       <Box sx={{ width: 300 }}>
         <Slider
           aria-label="Small steps"
