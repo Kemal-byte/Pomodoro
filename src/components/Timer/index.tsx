@@ -5,9 +5,8 @@ import { useEffect, useState } from "react";
 
 export default ({ state, dispatch }) => {
   const { NotifyError, NotifySuccess } = ToastifyNotification();
-  const [start, setStart] = useState(false);
   const [remainingTime, setRemainingTime] = useState(state.timer * 60);
-  console.log(state);
+  // console.log(state);
   /**
    * After the state timer has changed we update our state.
    * setState is Async call so it was following one step back.
@@ -20,15 +19,20 @@ export default ({ state, dispatch }) => {
   /**
    * Starts the timer and clears the setTimer on pause.
    */
+
   useEffect(() => {
     if (!state.started) return;
     const intervalId = setInterval(() => {
       setRemainingTime((prev) => prev - 1);
-      console.log(state.started);
-    }, 1000);
-
+      // console.log(state.started);
+    }, 10);
+    if (remainingTime <= 0) {
+      NotifySuccess(false);
+      dispatch({ type: "started_timer", payload: !state.started });
+      return clearInterval(intervalId);
+    }
     return () => clearInterval(intervalId);
-  }, [state.started]);
+  }, [state.started, remainingTime]);
 
   /**
    * A function that changes the timer in useReducer by using dispatch
@@ -69,11 +73,12 @@ export default ({ state, dispatch }) => {
    */
   const handleStart = () => {
     console.log("Start Clickeds");
-    console.log(state);
+    // console.log(state);
     checkInputs();
     dispatch({ type: "started_timer", payload: !state.started });
     // setStart(!start);
   };
+
   const minutes = Math.floor(remainingTime / 60);
   const seconds = remainingTime % 60;
   const fomattedTime = `${minutes.toString().padStart(2, "0")}:${seconds

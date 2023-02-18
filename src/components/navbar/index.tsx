@@ -4,26 +4,32 @@ import Gear from "../../assets/Gear.svg";
 import ChartPie from "../../assets/ChartPie.svg";
 import Profile from "../../assets/Profile.svg";
 
-type Props = {
-  graph: boolean;
-  setGraph: React.Dispatch<React.SetStateAction<boolean>>;
-};
+export default ({ graph, setGraph, setSettings, settings }) => {
+  const handleGraph = (e) => {
+    // console.log(e.target.id);
+    const { id } = e.target;
 
-export default ({ graph, setGraph }: Props) => {
-  const handleGraph = () => {
-    setGraph((graph) => !graph);
+    //TODO: Depending on which navbar button is clicked toggle between different components.
+    console.log(id);
+    if (id === "chart") {
+      setSettings(false);
+      setGraph(!graph);
+    } else if (id === "settings") {
+      setGraph(false);
+      setSettings(!settings);
+    }
   };
 
   return (
     <Navbar>
-      <NavItems onClick={handleGraph}>
-        <img src={ChartPie} alt="" />
+      <NavItems onClick={(e) => handleGraph(e)} id="chart">
+        <img src={ChartPie} alt="Charts icon button" id="chart" />
       </NavItems>
-      <NavItems>
-        <img src={Profile} alt="" />
+      <NavItems onClick={(e) => handleGraph(e)} id="profile">
+        <img src={Profile} alt="Login to your profile" id="profile" />
       </NavItems>
-      <NavItems>
-        <img src={Gear} alt="" />
+      <NavItems onClick={(e) => handleGraph(e)} id="settings">
+        <img src={Gear} alt="Settings section" id="settings" />
       </NavItems>
     </Navbar>
   );

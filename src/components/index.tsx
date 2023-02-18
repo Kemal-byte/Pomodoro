@@ -9,7 +9,8 @@ import Colors from "../utilities/commonCss/colors";
 import { Box } from "@mui/material";
 import Blob1 from "../assets/Blob1.svg";
 import Blob2 from "../assets/Blob2.svg";
-import Graps from "./graphs";
+import Graphs from "./graphs";
+import SettingComp from "./settings";
 import reducer, { initialState } from "../reducer/reducer";
 
 const ContainerMain = styled.main`
@@ -38,6 +39,7 @@ const Container = styled.section`
 export default () => {
   let localState = JSON.parse(localStorage.getItem("myState"));
   const [graph, setGraph] = useState(false);
+  const [settings, setSettings] = useState(false);
   let [state, dispatch] = useReducer(reducer, localState || initialState);
 
   /**
@@ -46,6 +48,26 @@ export default () => {
   useEffect(() => {
     localStorage.setItem("myState", JSON.stringify(state));
   }, [state]);
+  function offf() {
+    console.log("Inside offff");
+    console.log(graph, settings);
+    let content;
+    if (!graph && !settings) {
+      //TODO: Don't call setSettings and setGraph here. Call them using event handlers inside the navbar.
+      content = (
+        <>
+          <Inputs state={state} dispatch={dispatch} />
+          <Timer state={state} dispatch={dispatch} />
+          <Tasks />
+        </>
+      );
+    } else if (graph) {
+      content = <Graphs />;
+    } else if (settings) {
+      content = <SettingComp />;
+    }
+    return content;
+  }
 
   return (
     <ContainerMain>
@@ -60,10 +82,16 @@ export default () => {
         <img src={Blob1} alt="" />
       </Box>
       <Container>
-        <Navbar setGraph={setGraph} graph={graph} />
-        {graph ? (
+        <Navbar
+          setGraph={setGraph}
+          setSettings={setSettings}
+          settings={settings}
+          graph={graph}
+        />
+        {offf()}
+        {/* {graph ? (
           <>
-            <Graps />
+            <Graphs />
           </>
         ) : (
           <>
@@ -71,7 +99,7 @@ export default () => {
             <Timer state={state} dispatch={dispatch} />
             <Tasks />
           </>
-        )}
+        )} */}
       </Container>
       <Box
         sx={{
