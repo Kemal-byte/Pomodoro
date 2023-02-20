@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 const ToastifyNotification = () => {
   const NotifySuccess = (start: boolean) => {
     if (start) {
-      toast("Let's go!!!");
+      toast("Break is finished!");
     } else {
       toast("Pomodoro finished!");
     }

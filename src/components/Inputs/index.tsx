@@ -10,6 +10,7 @@ export default ({ state, dispatch }) => {
     console.log(state);
     dispatch({ type: tip, payload: val });
   };
+  console.log(state);
   return (
     <div className="input__container">
       <TextField
@@ -19,8 +20,8 @@ export default ({ state, dispatch }) => {
         id="outlined-size-normal"
         type="number"
         disabled={state.started}
-        value={state.sets}
-        inputProps={{ min: 1, max: 60, readOnly: state.started }}
+        value={state.sets || 1}
+        inputProps={{ min: 1, max: 60 }}
         className="textfield__label"
         InputLabelProps={{ className: "textfield__label" }}
         onChange={(e) =>

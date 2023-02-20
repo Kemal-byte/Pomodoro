@@ -53,7 +53,6 @@ export default () => {
     console.log(graph, settings);
     let content;
     if (!graph && !settings) {
-      //TODO: Don't call setSettings and setGraph here. Call them using event handlers inside the navbar.
       content = (
         <>
           <Inputs state={state} dispatch={dispatch} />
