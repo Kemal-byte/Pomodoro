@@ -3,10 +3,14 @@ import Navbar, { NavItems } from "./index.styled.jsx";
 import Gear from "../../assets/Gear.svg";
 import ChartPie from "../../assets/ChartPie.svg";
 import Profile from "../../assets/Profile.svg";
+import LoginModal from "../modals/login.js";
 
 export default ({ graph, setGraph, setSettings, settings }) => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const handleGraph = (e) => {
-    // console.log(e.target.id);
     const { id } = e.target;
 
     //TODO: Depending on which navbar button is clicked toggle between different components.
@@ -25,9 +29,7 @@ export default ({ graph, setGraph, setSettings, settings }) => {
       <NavItems onClick={(e) => handleGraph(e)} id="chart">
         <img src={ChartPie} alt="Charts icon button" id="chart" />
       </NavItems>
-      <NavItems onClick={(e) => handleGraph(e)} id="profile">
-        <img src={Profile} alt="Login to your profile" id="profile" />
-      </NavItems>
+      <LoginModal />
       <NavItems onClick={(e) => handleGraph(e)} id="settings">
         <img src={Gear} alt="Settings section" id="settings" />
       </NavItems>
