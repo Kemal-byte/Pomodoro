@@ -6,6 +6,7 @@ const useTimer = (state, dispatch) => {
   const [timeLeft, setTimeLeft] = useState(state.timer * 60); // set initial timer value to 60 seconds
   const [onBreak, setOnBreak] = useState(false);
   const timerRef = useRef(null);
+  // console.log("OnBreak : ", onBreak);
 
   useEffect(() => {
     setTimeLeft(state.timer * 60);
@@ -22,9 +23,11 @@ const useTimer = (state, dispatch) => {
       NotifySuccess(true);
       setTimeLeft(state.break * 60);
     } else {
-      NotifySuccess(false);
-      dispatch({ type: "numberOf_reps", payload: state.sets - 1 });
-      setTimeLeft(state.timer * 60);
+      if (state.started) {
+        NotifySuccess(false);
+        dispatch({ type: "numberOf_reps", payload: state.sets - 1 });
+        setTimeLeft(state.timer * 60);
+      }
     }
   }, [onBreak]);
 
@@ -75,3 +78,5 @@ const useTimer = (state, dispatch) => {
 };
 
 export default useTimer;
+
+//Maybe write this in a useReducer function
