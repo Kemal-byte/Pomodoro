@@ -1,14 +1,7 @@
 .MuiOutlinedInput-input {
   color: #fff !important;
-  border-color: #fff !important;
-  outline-color: #fff !important;
   background-color: rgb(6, 6, 6) !important;
-  width: 90px !important;
   border-radius: 5px !important;
-}
-
-.textfield__label {
-  color: #fff !important;
 }
 
 .input__container {
