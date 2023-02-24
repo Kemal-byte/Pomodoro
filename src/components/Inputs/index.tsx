@@ -1,17 +1,36 @@
-import { TextField } from "@mui/material";
+import {
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import "./index.css";
 import { styled } from "@mui/system";
+import { useState } from "react";
 
 const StyledInput = styled(TextField, {
   name: "InputFields",
 })({ width: "120px !important" });
+const StyledInputLabel = styled(InputLabel, {
+  name: "InputLable",
+})({ color: "#fff" });
 
 export default ({ state, dispatch }) => {
+  const [tag, setTag] = useState("");
+  const [tags, setTags] = useState(["Study", "Reading", "Math", "Gym"]);
+
   const handleChange = (tip: string, val: any) => {
     console.log(state);
     dispatch({ type: tip, payload: val });
   };
-  console.log(state);
+  // console.log(state);
+
+  const handleChangeSelect = (event) => {
+    setTag(event.target.value as string);
+  };
+
   return (
     <div className="input__container">
       <StyledInput
@@ -46,20 +65,28 @@ export default ({ state, dispatch }) => {
           handleChange("duration_breaks", parseInt(e.target.value))
         }
       />
-      <StyledInput
-        variant="outlined"
-        id="Tag-name"
-        InputLabelProps={{ sx: { color: "#fff" } }}
-        inputProps={{ maxLength: 10, readOnly: state.started }}
-        error={state.tags && state.tags?.length > 14 ? true : false}
-        helperText={state.tags && state.tags?.length > 10 && "max 10 char."}
-        disabled={state.started}
-        label="Tags"
-        type="text"
-        value={state.tags}
-        placeholder="Reading"
-        onChange={(e) => handleChange("naming_tag", e.target.value)}
-      />
+      <Box sx={{ minWidth: 120 }}>
+        <FormControl fullWidth>
+          <StyledInputLabel id="demo-simple-select-label">
+            Tags
+          </StyledInputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={tag}
+            label="Tags"
+            onChange={handleChangeSelect}
+          >
+            {tags.map((item) => {
+              return (
+                <MenuItem value={item} sx={{ color: "#000" }} key={item}>
+                  {item}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
+      </Box>
     </div>
   );
 };
