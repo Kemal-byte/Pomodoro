@@ -6,6 +6,9 @@ import Profile from "../../assets/Profile.svg";
 import { Button, TextField, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import Colors from "../../utilities/commonCss/colors";
+import createUser from "../../../firebase/createAccount";
+import signIn from "../../../firebase/loginUser";
+
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -26,8 +29,31 @@ const LoginInput = styled(TextField, {
 export default function BasicModal() {
   const [open, setOpen] = React.useState(false);
   const [isLogin, setIsLogin] = React.useState(true);
+  const [user, setUser] = React.useState({
+    email: "",
+    password: "",
+  });
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleChange = (e) => {
+    const { name } = e.target;
+    if (name === "email") {
+      setUser({ ...user, email: e.target.value });
+    } else {
+      setUser({ ...user, password: e.target.value });
+    }
+  };
+  const LoginHandle = () => {
+    console.log("Login handle clicked");
+    const { email, password } = user;
+    signIn(email, password);
+  };
+  const RegisterHandle = () => {
+    console.log("Register handle clicked");
+    const { email, password } = user;
+    createUser(email, password);
+  };
 
   return (
     <div>
@@ -56,14 +82,19 @@ export default function BasicModal() {
               error={false}
               id="outlined-error-helper-text"
               label="User Email"
+              value={user.email}
+              name="email"
               placeholder="Enter your email address"
-              // helperText="Incorrect entry."
+              onChange={(e) => handleChange(e)}
               InputLabelProps={{ sx: { color: "#fff" } }}
             />
             <LoginInput
               id="Password"
               label="Password"
+              value={user.password}
+              name="password"
               placeholder="Enter your password"
+              onChange={(e) => handleChange(e)}
               InputLabelProps={{ sx: { color: "#fff" } }}
             />
             {!isLogin && (
@@ -74,7 +105,11 @@ export default function BasicModal() {
                 InputLabelProps={{ sx: { color: "#fff" } }}
               />
             )}
-            <Button sx={{ backgroundColor: "red" }}>
+            <Button
+              sx={{ backgroundColor: "red" }}
+              type="submit"
+              onClick={isLogin ? LoginHandle : RegisterHandle}
+            >
               {isLogin ? "Login" : "Register"}
             </Button>
             <Typography
