@@ -73,4 +73,4 @@ export const dbStructure = {
   [year]: monthsObject,
 };
 
-console.log(dbStructure);
+// console.log(dbStructure);

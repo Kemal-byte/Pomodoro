@@ -29,6 +29,7 @@ export default ({ state, dispatch }) => {
 
   const handleChangeSelect = (event) => {
     setTag(event.target.value as string);
+    dispatch({ type: "naming_tag", payload: event.target.value as string });
   };
 
   return (
