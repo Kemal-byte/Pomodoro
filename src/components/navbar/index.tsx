@@ -4,6 +4,7 @@ import Gear from "../../assets/Gear.svg";
 import ChartPie from "../../assets/ChartPie.svg";
 import Profile from "../../assets/Profile.svg";
 import LoginModal from "../modals/login.js";
+import authReducer, { initialStateUser } from "../../reducer/authReducer.js";
 
 export default ({ graph, setGraph, setSettings, settings }) => {
   const [open, setOpen] = React.useState(false);
@@ -12,7 +13,6 @@ export default ({ graph, setGraph, setSettings, settings }) => {
 
   const handleGraph = (e) => {
     const { id } = e.target;
-
     //TODO: Depending on which navbar button is clicked toggle between different components.
     console.log(id);
     if (id === "chart") {

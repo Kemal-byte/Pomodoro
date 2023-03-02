@@ -42,6 +42,7 @@ export default () => {
   const [graph, setGraph] = useState(false);
   const [settings, setSettings] = useState(false);
   let [state, dispatch] = useReducer(reducer, localState || initialState);
+  console.log(state);
 
   /**
    * When the initial state is changed, we are updating the local storage.

@@ -9,6 +9,7 @@ import Colors from "../../utilities/commonCss/colors";
 import createUser from "../../../firebase/createAccount";
 import signIn from "../../../firebase/loginUser";
 import userHook from "../../hooks/userHook";
+import authReducer, { initialStateUser } from "../../reducer/authReducer";
 
 const style = {
   position: "absolute" as "absolute",
@@ -35,6 +36,7 @@ export default function BasicModal() {
     password: "",
   });
   const { setUserReducer } = userHook();
+  const [state] = React.useReducer(authReducer, initialStateUser);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -83,7 +85,7 @@ export default function BasicModal() {
             sx={{ color: Colors.primaryYellow, fontWeight: 900 }}
             gutterBottom={true}
           >
-            Welcome
+            {state.loggedIn ? "Logout" : "Welcome"}
           </Typography>
           ;
           <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
