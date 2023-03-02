@@ -12,6 +12,7 @@ import Blob2 from "../assets/Blob2.svg";
 import Graphs from "./graphs";
 import SettingComp from "./settings";
 import reducer, { initialState } from "../reducer/reducer";
+import authReducer from "../reducer/authReducer";
 
 const ContainerMain = styled.main`
   text-align: center;
@@ -48,9 +49,10 @@ export default () => {
   useEffect(() => {
     localStorage.setItem("myState", JSON.stringify(state));
   }, [state]);
+
   function offf() {
-    console.log("Inside offff");
-    console.log(graph, settings);
+    // console.log("Inside offff");
+    // console.log(graph, settings);
     let content;
     if (!graph && !settings) {
       content = (

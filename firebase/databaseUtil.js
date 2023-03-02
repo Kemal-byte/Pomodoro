@@ -17,7 +17,7 @@ export function getWeekOfMonth(date) {
   return Math.floor((currentDate - firstMonday) / 7) + 1;
 }
 
-const months = [
+export const months = [
   "Jan",
   "Feb",
   "Mar",

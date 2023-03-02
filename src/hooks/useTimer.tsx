@@ -6,9 +6,25 @@ const useTimer = (state, dispatch) => {
   const [timeLeft, setTimeLeft] = useState(state.timer * 60); // set initial timer value to 60 seconds
   const [onBreak, setOnBreak] = useState(false);
   const timerRef = useRef(null);
+  type storedType = {
+    sets: number;
+    timer: number;
+    tag: string;
+  };
+  let storedData: storedType = {
+    sets: 0,
+    timer: 0,
+    tag: "",
+  };
   // console.log("OnBreak : ", onBreak);
 
   useEffect(() => {
+    storedData = {
+      sets: state.sets,
+      timer: state.timer,
+      tag: state.tags,
+    };
+    console.log("Stored data is : {}", storedData);
     setTimeLeft(state.timer * 60);
   }, [state.timer]);
 
@@ -40,6 +56,10 @@ const useTimer = (state, dispatch) => {
     return () => clearInterval(timerRef.current);
   }, [state.started]);
 
+  /**
+   * When the sets are over, it will stop the timer.
+   * TODO: Add a function here so it can push it to the db with the stored data.
+   */
   useEffect(() => {
     if (state.sets < 1) {
       clearInterval(timerRef.current);

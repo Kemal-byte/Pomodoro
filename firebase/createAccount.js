@@ -9,7 +9,6 @@ async function createUser(email, password) {
       // Signed in
       const user = userCredential.user;
       console.log(user);
-      return user;
     })
     .then((userInfo) => {
       writeUserData(userInfo.uid);

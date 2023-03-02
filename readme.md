@@ -17,3 +17,6 @@ This is a simple pomodoro app. It will be easy to use easy to track the number o
 
 - When I was hovering over the position:fixed elements it didn't let me scroll, Solution was to add a new css property to position fixed elements,
   which is pointerEvents: "none"
+
+- URGENT: Currently when I login I can't update the useReducer state because I can't call
+  hooks inside regular js file.

@@ -4,7 +4,6 @@ import useTimer from "../../hooks/useTimer";
 
 export default ({ state, dispatch }) => {
   const timerHook = useTimer(state, dispatch);
-  // console.log(timerHook);
 
   const handleChange = (e: any) => {
     if (e !== null) {

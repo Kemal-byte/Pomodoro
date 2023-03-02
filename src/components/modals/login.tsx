@@ -8,6 +8,7 @@ import styled from "@emotion/styled";
 import Colors from "../../utilities/commonCss/colors";
 import createUser from "../../../firebase/createAccount";
 import signIn from "../../../firebase/loginUser";
+import userHook from "../../hooks/userHook";
 
 const style = {
   position: "absolute" as "absolute",
@@ -33,6 +34,7 @@ export default function BasicModal() {
     email: "",
     password: "",
   });
+  const { setUserReducer } = userHook();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -44,10 +46,17 @@ export default function BasicModal() {
       setUser({ ...user, password: e.target.value });
     }
   };
-  const LoginHandle = () => {
+  const LoginHandle = async () => {
     console.log("Login handle clicked");
     const { email, password } = user;
-    signIn(email, password);
+    try {
+      const user = await signIn(email, password);
+      const userInfo = user ? user.uid : null;
+      console.log(userInfo);
+      setUserReducer(userInfo);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
   const RegisterHandle = () => {
     console.log("Register handle clicked");
