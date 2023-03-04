@@ -13,6 +13,7 @@ import Graphs from "./graphs";
 import SettingComp from "./settings";
 import reducer, { initialState } from "../reducer/reducer";
 import authReducer from "../reducer/authReducer";
+import userHook from "../hooks/userHook";
 
 const ContainerMain = styled.main`
   text-align: center;
@@ -39,16 +40,20 @@ const Container = styled.section`
 
 export default () => {
   let localState = JSON.parse(localStorage.getItem("myState"));
+  let localUser = JSON.parse(localStorage.getItem("myUser"));
   const [graph, setGraph] = useState(false);
   const [settings, setSettings] = useState(false);
   let [state, dispatch] = useReducer(reducer, localState || initialState);
   console.log(state);
+  const { setUserReducer } = userHook();
 
   /**
    * When the initial state is changed, we are updating the local storage.
    */
   useEffect(() => {
     localStorage.setItem("myState", JSON.stringify(state));
+    //! It doesn't work as intended.
+    // setUserReducer(localUser?.userId);
   }, [state]);
 
   function offf() {

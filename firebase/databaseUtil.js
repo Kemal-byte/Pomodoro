@@ -1,20 +1,21 @@
 export function getWeekOfMonth(date) {
-  // Clone the date object and set it to the first day of the month
-  let startOfMonth = new Date(date.getTime());
+  const startOfMonth = new Date(date.getTime());
   startOfMonth.setDate(1);
 
-  // Get the day of week of the first day (0 for Sunday, 1 for Monday, etc.)
-  let dayOfWeek = startOfMonth.getDay();
+  const dayOfWeek = startOfMonth.getDay();
 
-  // Get the date of the first Monday of the month
-  let firstMonday = dayOfWeek === 0 ? 2 : 9 - dayOfWeek;
+  const firstMonday = dayOfWeek === 0 ? 2 : 9 - dayOfWeek;
 
-  // Get the date of the given date
-  let currentDate = date.getDate();
+  const currentDate = date.getDate();
 
-  // Return the week number based on the difference between
-  //the current date and the first Monday
-  return Math.floor((currentDate - firstMonday) / 7) + 1;
+  const weeksInMonth = Math.ceil((currentDate - firstMonday + 1) / 7);
+
+  // Limit the result to 0-3
+  if (weeksInMonth > 3) {
+    return 3;
+  } else {
+    return weeksInMonth;
+  }
 }
 
 export const months = [
@@ -31,8 +32,8 @@ export const months = [
   "Nov",
   "Dec",
 ];
-const WeekNames = ["firstWeek", "secondWeek", "thirdWeek", "fourthWeek"];
-const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+export const WeekNames = ["firstWeek", "secondWeek", "thirdWeek", "fourthWeek"];
+export const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const d = new Date();
 let year = d.getFullYear();
 

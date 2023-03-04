@@ -10,6 +10,7 @@ import createUser from "../../../firebase/createAccount";
 import signIn from "../../../firebase/loginUser";
 import userHook from "../../hooks/userHook";
 import authReducer, { initialStateUser } from "../../reducer/authReducer";
+import { writeUserData } from "../../../firebase/database";
 
 const style = {
   position: "absolute" as "absolute",
@@ -54,6 +55,7 @@ export default function BasicModal() {
     try {
       const user = await signIn(email, password);
       const userInfo = user ? user.uid : null;
+      // writeUserData(userInfo);
       console.log(userInfo);
       setUserReducer(userInfo);
     } catch (error) {

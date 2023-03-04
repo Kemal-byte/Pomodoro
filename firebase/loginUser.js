@@ -17,6 +17,7 @@ async function signIn(email, password) {
   } catch (error) {
     const errorCode = error.code;
     const errorMessage = error.message;
+    console.log(errorMessage);
   }
   console.log(userInfo);
   return userInfo;
