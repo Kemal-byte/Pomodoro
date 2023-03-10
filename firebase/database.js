@@ -49,4 +49,16 @@ export function writeTimerData(userId, data) {
   update(userRef, {
     dailyTotal: increment(data?.sets * data?.timer),
   });
+  update(
+    ref(
+      db,
+      `users/${userId}/${year}/${months[month]}/${WeekNames[weekNumber]}`
+    ),
+    {
+      weeklyTotal: increment(data?.sets * data?.timer),
+    }
+  );
+  update(ref(db, `users/${userId}/${year}/${months[month]}`), {
+    monthlyTotal: increment(data?.sets * data?.timer),
+  });
 }
