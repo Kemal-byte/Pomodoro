@@ -1,7 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import ToastifyNotification from "../utilities/popup";
 import { writeTimerData } from "../../firebase/database";
-const useTimer = (state, dispatch) => {
+
+type StateType = {
+  timer: number;
+  sets: number;
+  tags: string;
+  break: number;
+  started: boolean;
+};
+type DispatchType = (arg0: { type: string; payload: number | boolean }) => void;
+const useTimer = (state: StateType, dispatch: DispatchType) => {
   const { NotifyError, NotifySuccess } = ToastifyNotification();
   const [timeLeft, setTimeLeft] = useState(state.timer * 60); // set initial timer value to 60 seconds
   const [onBreak, setOnBreak] = useState(false);
@@ -23,7 +32,10 @@ const useTimer = (state, dispatch) => {
     timer: 0,
     tag: "focus",
   };
-  // console.log("OnBreak : ", onBreak);
+
+  useEffect(() => {
+    setTimeLeft(state.timer * 60);
+  }, [state.timer]);
 
   useEffect(() => {
     storedData = {
@@ -33,8 +45,7 @@ const useTimer = (state, dispatch) => {
     };
     setA(storedData);
     console.log("Stored data is : {}", storedData);
-    setTimeLeft(state.timer * 60);
-  }, [state.timer]);
+  }, [state.started]);
 
   useEffect(() => {
     if (timeLeft === 0) {
@@ -76,6 +87,7 @@ const useTimer = (state, dispatch) => {
       dispatch({ type: "started_timer", payload: false });
       if (localUser.loggedIn) {
         console.log("writeTimerData called");
+        console.log(a);
         writeTimerData(localUser.userId, a);
       }
     }

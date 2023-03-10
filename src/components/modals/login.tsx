@@ -87,7 +87,7 @@ export default function BasicModal() {
             sx={{ color: Colors.primaryYellow, fontWeight: 900 }}
             gutterBottom={true}
           >
-            {state.loggedIn ? "Logout" : "Welcome"}
+            {state?.loggedIn ? "Logout" : "Welcome"}
           </Typography>
           ;
           <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>

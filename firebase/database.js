@@ -36,15 +36,17 @@ export function writeUserData(userId) {
  * This function updates the data on the database. Push the values to firebase.
  * @param {string} userId
  */
-export async function writeTimerData(userId, data) {
+
+export function writeTimerData(userId, data) {
   console.log(data);
-  // await update(
-  //   ref(
-  //     db,
-  //     `users/${userId}/${year}/${months[month]}/${WeekNames[weekNumber]}/${days[dayNumber]}`
-  //   ),
-  //   {
-  //     [data?.tag]: increment(data?.sets * data?.timer),
-  //   }
-  // );
+  const userRef = ref(
+    db,
+    `users/${userId}/${year}/${months[month]}/${WeekNames[weekNumber]}/${days[dayNumber]}`
+  );
+  update(userRef, {
+    [data?.tag]: increment(data?.sets * data?.timer),
+  });
+  update(userRef, {
+    dailyTotal: increment(data?.sets * data?.timer),
+  });
 }
