@@ -23,7 +23,6 @@ export default function BasicModal() {
     password: "",
   });
   const { setUserReducer, state } = userHook();
-  // console.log("state is ", state);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

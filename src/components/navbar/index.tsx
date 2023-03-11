@@ -2,10 +2,7 @@ import React from "react";
 import Navbar, { NavItems } from "./index.styled.jsx";
 import Gear from "../../assets/Gear.svg";
 import ChartPie from "../../assets/ChartPie.svg";
-import Profile from "../../assets/Profile.svg";
 import LoginModal from "../modals/login.js";
-import authReducer, { initialStateUser } from "../../reducer/authReducer.js";
-import userHook from "../../hooks/userHook.js";
 
 export default ({ graph, setGraph, setSettings, settings }) => {
   const [open, setOpen] = React.useState(false);

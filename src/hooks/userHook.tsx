@@ -11,6 +11,8 @@ const userHook = () => {
     if (localState?.loggedIn == false) {
       console.log("INsie USER HOOK before LOCAL SET", state);
       localStorage.setItem("myUser", JSON.stringify(state));
+    } else {
+      dispatch({ type: "user_login", payload: localState?.userId });
     }
   }, [state?.loggedIn]);
 
