@@ -8,19 +8,17 @@ const userHook = () => {
   useEffect(() => {
     console.log("INside ----------------------------");
     console.log(state);
-    if (!localState?.loggedIn) {
+    if (localState?.loggedIn == false) {
       console.log("INsie USER HOOK before LOCAL SET", state);
       localStorage.setItem("myUser", JSON.stringify(state));
     }
-
-    // console.log("Inside SetUserReducer useEffect function", state);
   }, [state?.loggedIn]);
 
   function setUserReducer(userid: string) {
     console.log(userid);
     dispatch({ type: "user_login", payload: userid });
   }
-  return { setUserReducer };
+  return { setUserReducer, state };
 };
 
 export default userHook;

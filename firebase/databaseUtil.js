@@ -33,7 +33,7 @@ export const months = [
   "Dec",
 ];
 export const WeekNames = ["firstWeek", "secondWeek", "thirdWeek", "fourthWeek"];
-export const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+export const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const d = new Date();
 let year = d.getFullYear();
 

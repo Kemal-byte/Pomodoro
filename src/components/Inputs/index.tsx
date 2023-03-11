@@ -25,7 +25,6 @@ export default ({ state, dispatch }) => {
     console.log(state);
     dispatch({ type: tip, payload: val });
   };
-  // console.log(state);
 
   const handleChangeSelect = (event) => {
     setTag(event.target.value as string);

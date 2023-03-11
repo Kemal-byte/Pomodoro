@@ -12,7 +12,7 @@ import { auth, db } from "./firebase";
 const userRef = (id) => ref(db, `users/${id}`);
 const date = new Date();
 const year = date.getFullYear();
-const month = date.getMonth() + 1;
+const month = date.getMonth();
 const weekNumber = getWeekOfMonth(date);
 const dayNumber = date.getDay();
 /**
@@ -23,22 +23,16 @@ export function writeUserData(userId) {
   console.log("Inside Write user Data");
   set(userRef(userId), dbStructure);
 }
-const userId = auth.currentUser?.uid;
-// export function writeTimerData(setUser) {
-//   onAuthStateChanged(auth, (currentUser) => {
-//     console.log("On Auth change triggered");
-//     console.log(currentUser);
-//   });
-//   // dispatch({type: })
-// }
 
 /**
- * This function updates the data on the database. Push the values to firebase.
+ * This function updates the data on the database. Pushes values to firebase.
  * @param {string} userId
+ * @param {object} data
  */
-
 export function writeTimerData(userId, data) {
-  console.log(data);
+  if (userId == null || userId == undefined) return;
+  console.log(userId);
+  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
   const userRef = ref(
     db,
     `users/${userId}/${year}/${months[month]}/${WeekNames[weekNumber]}/${days[dayNumber]}`
@@ -51,27 +45,19 @@ export function writeTimerData(userId, data) {
   };
   update(userRef, updates);
 
-  writeMonthly(data);
-  // update(
-  //   ref(
-  //     db,
-  //     `users/${userId}/${year}/${months[month]}/${WeekNames[weekNumber]}`
-  //   ),
-  //   {
-  //     weeklyTotal: increment(data?.sets * data?.timer),
-  //   }
-  // );
   update(ref(db, `users/${userId}/${year}/${months[month]}`), {
     monthlyTotal: increment(data?.sets * data?.timer),
   });
+  writeMonthly(data, userId);
 }
-function writeMonthly(data) {
+function writeMonthly(data, userId) {
+  // console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+  // console.log(data);
   const userRef = ref(
     db,
     `users/${userId}/${year}/${months[month]}/${WeekNames[weekNumber]}`
   );
-  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-  console.log(userId);
+
   let updates = {};
   updates = {
     weeklyTotal: increment(data?.sets * data?.timer),
@@ -80,3 +66,14 @@ function writeMonthly(data) {
 
   update(userRef, updates);
 }
+
+/**
+ * Mistakes along the way.
+ *
+ * 1 - When writing writeMontly(), I typed like this;
+ * updates = {
+ * weeklyCategories: {
+ *  [data.tag]: increment(data?.sets * data?.timer) }}
+ * It was replacing the previous data and wasn't updating correctly. Everytime this method is called,
+ * it was overwriting the previous data. The correct way to do this is shown as above.
+ */

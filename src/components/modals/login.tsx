@@ -9,21 +9,7 @@ import Colors from "../../utilities/commonCss/colors";
 import createUser from "../../../firebase/createAccount";
 import signIn from "../../../firebase/loginUser";
 import userHook from "../../hooks/userHook";
-import authReducer, { initialStateUser } from "../../reducer/authReducer";
-import { writeUserData } from "../../../firebase/database";
-
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  borderRadius: "5px",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "#000",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import style from "./style.js";
 
 const LoginInput = styled(TextField, {
   name: "InputFields",
@@ -36,8 +22,9 @@ export default function BasicModal() {
     email: "",
     password: "",
   });
-  const { setUserReducer } = userHook();
-  const [state] = React.useReducer(authReducer, initialStateUser);
+  const { setUserReducer, state } = userHook();
+  // console.log("state is ", state);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -55,7 +42,6 @@ export default function BasicModal() {
     try {
       const user = await signIn(email, password);
       const userInfo = user ? user.uid : null;
-      // writeUserData(userInfo);
       console.log(userInfo);
       setUserReducer(userInfo);
     } catch (error) {

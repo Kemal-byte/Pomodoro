@@ -52,13 +52,14 @@ export default () => {
    */
   useEffect(() => {
     localStorage.setItem("myState", JSON.stringify(state));
-    //! It doesn't work as intended.
-    // setUserReducer(localUser?.userId);
+    if (localUser?.loggedIn) {
+      console.log("//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+      console.log(localUser);
+      setUserReducer(localUser?.userId);
+    }
   }, [state]);
 
   function offf() {
-    // console.log("Inside offff");
-    // console.log(graph, settings);
     let content;
     if (!graph && !settings) {
       content = (
@@ -96,17 +97,6 @@ export default () => {
           graph={graph}
         />
         {offf()}
-        {/* {graph ? (
-          <>
-            <Graphs />
-          </>
-        ) : (
-          <>
-            <Inputs state={state} dispatch={dispatch} />
-            <Timer state={state} dispatch={dispatch} />
-            <Tasks />
-          </>
-        )} */}
       </Container>
       <Box
         sx={{
