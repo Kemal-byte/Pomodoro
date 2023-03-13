@@ -9,7 +9,7 @@ type InitialState = {
 
 export const initialState: InitialState = {
   sets: 1,
-  break: 0,
+  break: 1,
   timer: 25,
   started: false,
 };

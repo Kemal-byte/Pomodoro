@@ -69,9 +69,11 @@ const useTimer = (state: StateType, dispatch: DispatchType) => {
   useEffect(() => {
     if (state.started === false || state.started === undefined) return;
     if (state.sets < 1) return;
+    // if (timeLeft > 1) {
     timerRef.current = setInterval(() => {
       setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
     }, 10);
+    // }
     return () => clearInterval(timerRef.current);
   }, [state.started]);
 
@@ -80,14 +82,14 @@ const useTimer = (state: StateType, dispatch: DispatchType) => {
    * TODO: Add a function here so it can push it to the db with the stored data.
    */
   useEffect(() => {
-    console.log(a);
+    // console.log(a);
     if (state.sets < 1) {
       clearInterval(timerRef.current);
       dispatch({ type: "numberOf_reps", payload: 1 });
       dispatch({ type: "started_timer", payload: false });
-      if (localUser.loggedIn) {
-        console.log("writeTimerData called");
-        console.log(a);
+      if (localUser?.loggedIn) {
+        // console.log("writeTimerData called");
+        // console.log(a);
         writeTimerData(localUser.userId, a);
       }
     }

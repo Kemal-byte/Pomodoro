@@ -36,19 +36,19 @@ export default function BasicModal() {
     }
   };
   const LoginHandle = async () => {
-    console.log("Login handle clicked");
+    // console.log("Login handle clicked");
     const { email, password } = user;
     try {
       const user = await signIn(email, password);
       const userInfo = user ? user.uid : null;
-      console.log(userInfo);
+      // console.log(userInfo);
       setUserReducer(userInfo);
     } catch (error) {
       console.log(error.message);
     }
   };
   const RegisterHandle = () => {
-    console.log("Register handle clicked");
+    // console.log("Register handle clicked");
     const { email, password } = user;
     createUser(email, password);
   };

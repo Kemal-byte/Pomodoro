@@ -53,8 +53,8 @@ export default () => {
   useEffect(() => {
     localStorage.setItem("myState", JSON.stringify(state));
     if (localUser?.loggedIn) {
-      console.log("//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-      console.log(localUser);
+      // console.log("//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+      // console.log(localUser);
       setUserReducer(localUser?.userId);
     }
   }, [state]);
