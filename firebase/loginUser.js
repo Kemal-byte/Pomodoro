@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { writeTimerData } from "./database";
 import { auth } from "./firebase";
 
@@ -21,5 +21,9 @@ async function signIn(email, password) {
   }
   console.log(userInfo);
   return userInfo;
+}
+
+export async function logOut() {
+  await signOut(auth);
 }
 export default signIn;

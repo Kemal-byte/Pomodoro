@@ -1,81 +1,23 @@
-import React, { useState, useReducer, useEffect } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import Navbar from "./navbar";
-import Inputs from "./Inputs";
-import Timer from "./Timer";
-import Tasks from "./tasks";
-import styled from "styled-components";
+
+import { ContainerMain, Container } from "./index.styled";
 // @ts-ignore
-import Colors from "../utilities/commonCss/colors";
 import { Box } from "@mui/material";
 import Blob1 from "../assets/Blob1.svg";
 import Blob2 from "../assets/Blob2.svg";
-import Graphs from "./graphs";
-import SettingComp from "./settings";
-import reducer, { initialState } from "../reducer/reducer";
-import authReducer from "../reducer/authReducer";
-import userHook from "../hooks/userHook";
-
-const ContainerMain = styled.main`
-  text-align: center;
-  color: ${Colors.primaryYellow};
-  background-color: ${Colors.primaryBG};
-  height: 100%;
-  width: 100%;
-  padding-top: 4rem;
-  position: relative;
-  overflow: auto;
-`;
-const Container = styled.section`
-  width: 500px;
-  margin: auto;
-  display: flex;
-  gap: 4rem;
-  flex-direction: column;
-  position: relative;
-  z-index: 100;
-  @media screen and (max-width: 545px) {
-    width: 90%;
-  }
-`;
+import Main from "./Main";
+import authReducer, { initialStateUser } from "../reducer/authReducer";
 
 export default () => {
-  let localState = JSON.parse(localStorage.getItem("myState"));
-  let localUser = JSON.parse(localStorage.getItem("myUser"));
   const [graph, setGraph] = useState(false);
   const [settings, setSettings] = useState(false);
-  let [state, dispatch] = useReducer(reducer, localState || initialState);
+  let localUser = JSON.parse(localStorage.getItem("myUser"));
+  let [state, dispatch] = useReducer(
+    authReducer,
+    localUser || initialStateUser
+  );
   console.log(state);
-  const { setUserReducer } = userHook();
-
-  /**
-   * When the initial state is changed, we are updating the local storage.
-   */
-  useEffect(() => {
-    localStorage.setItem("myState", JSON.stringify(state));
-    if (localUser?.loggedIn) {
-      // console.log("//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-      // console.log(localUser);
-      setUserReducer(localUser?.userId);
-    }
-  }, [state]);
-
-  function offf() {
-    let content;
-    if (!graph && !settings) {
-      content = (
-        <>
-          <Inputs state={state} dispatch={dispatch} />
-          <Timer state={state} dispatch={dispatch} />
-          <Tasks />
-        </>
-      );
-    } else if (graph) {
-      content = <Graphs />;
-    } else if (settings) {
-      content = <SettingComp />;
-    }
-    return content;
-  }
 
   return (
     <ContainerMain>
@@ -96,7 +38,7 @@ export default () => {
           settings={settings}
           graph={graph}
         />
-        {offf()}
+        <Main graph={graph} settings={settings} />
       </Container>
       <Box
         sx={{

@@ -5,7 +5,7 @@ type userMetaInfo = {
 
 export const initialStateUser: userMetaInfo = {
   loggedIn: false,
-  userId: null,
+  userId: "",
 };
 export type ACTIONTYPE =
   | { type: "user_login"; payload: string }
@@ -21,7 +21,7 @@ const authReducer = (state: userMetaInfo = initialStateUser, action: any) => {
     case "user_logout":
       return {
         loggedIn: false,
-        userId: null,
+        userId: "",
       };
     default:
       throw new Error();
