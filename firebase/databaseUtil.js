@@ -52,7 +52,6 @@ for (let i = 0; i < WeekNames.length; i++) {
     ...weeksObject,
     [WeekNames[i]]: {
       weeklyTotal: 0,
-      categories: { holder: "" },
       ...dayObject,
     },
   };
@@ -63,8 +62,7 @@ for (let i = 0; i < months.length; i++) {
   monthsObject = {
     ...monthsObject,
     [months[i]]: {
-      montlyTotal: 0,
-      categories: { somethings: "" },
+      monthlyTotal: 0,
       ...weeksObject,
     },
   };

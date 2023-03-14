@@ -47,6 +47,7 @@ export function writeTimerData(userId, data) {
 
   update(ref(db, `users/${userId}/${year}/${months[month]}`), {
     monthlyTotal: increment(data?.sets * data?.timer),
+    [`monthlyCategories/${data?.tag}`]: increment(data?.sets * data?.timer),
   });
   writeMonthly(data, userId);
 }
