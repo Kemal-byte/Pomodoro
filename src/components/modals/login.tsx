@@ -7,10 +7,11 @@ import { Button, TextField, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import Colors from "../../utilities/commonCss/colors";
 import createUser from "../../../firebase/createAccount";
-import signIn from "../../../firebase/loginUser";
+import signIn, { logOut } from "../../../firebase/loginUser";
 // import userHook from "../../hooks/userHook";
 import style from "./style.js";
-import { auth } from "../../../firebase/firebase";
+import { globalUser } from "../../../firebase/firebase";
+
 const LoginInput = styled(TextField, {
   name: "InputFields",
 })({ width: "100% !important" });
@@ -22,9 +23,6 @@ export default function BasicModal() {
     email: "",
     password: "",
   });
-
-  // const { setUserReducer, state } = userHook();
-  let oha = auth?.currentUser?.uid || null;
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -38,16 +36,23 @@ export default function BasicModal() {
     }
   };
   const LoginHandle = async () => {
-    const { email, password } = user;
-    try {
-      console.log("Login handle clicked");
-      const user = await signIn(email, password);
-      // const userInfo = user ? user.uid : null;
+    if (globalUser) {
+      console.log("logged out");
+      logOut();
+      console.log(globalUser);
+    } else {
+      console.log("tries to log in");
+      const { email, password } = user;
+      try {
+        console.log("Login handle clicked");
+        const user = await signIn(email, password);
+        // const userInfo = user ? user.uid : null;
 
-      console.log("object");
-      // setUserReducer(userInfo);
-    } catch (error) {
-      console.log(error.message);
+        console.log("object");
+        // setUserReducer(userInfo);
+      } catch (error) {
+        console.log(error.message);
+      }
     }
   };
   const RegisterHandle = () => {
@@ -74,8 +79,9 @@ export default function BasicModal() {
             sx={{ color: Colors.primaryYellow, fontWeight: 900 }}
             gutterBottom={true}
           >
-            {oha ? "Logout" : "Welcome"}
+            {globalUser ? "Signed in" : "Welcome"}
           </Typography>
+
           <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
             <LoginInput
               error={false}

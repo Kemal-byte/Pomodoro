@@ -34,6 +34,8 @@ onAuthStateChanged(auth, (user) => {
     console.log(user);
     globalUser = user.uid;
     // const uid = user.uid;
+  } else {
+    globalUser = "";
   }
 });
 export let globalUser = "";
