@@ -15,8 +15,6 @@ const useTimer = (state: StateType, dispatch: DispatchType) => {
   const [timeLeft, setTimeLeft] = useState(state.timer * 60); // set initial timer value to 60 seconds
   const [onBreak, setOnBreak] = useState(false);
   const timerRef = useRef(null);
-  const [currentUserId, setCurrentUserId] = useState("");
-  // let localUser = JSON.parse(localStorage.getItem("myUser"));
 
   const [a, setA] = useState({
     sets: 0,

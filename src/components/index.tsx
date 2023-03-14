@@ -7,17 +7,10 @@ import { Box } from "@mui/material";
 import Blob1 from "../assets/Blob1.svg";
 import Blob2 from "../assets/Blob2.svg";
 import Main from "./Main";
-import authReducer, { initialStateUser } from "../reducer/authReducer";
 
 export default () => {
   const [graph, setGraph] = useState(false);
   const [settings, setSettings] = useState(false);
-  let localUser = JSON.parse(localStorage.getItem("myUser"));
-  let [state, dispatch] = useReducer(
-    authReducer,
-    localUser || initialStateUser
-  );
-  console.log(state);
 
   return (
     <ContainerMain>

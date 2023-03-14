@@ -1,21 +1,7 @@
-import {
-  Box,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from "@mui/material";
+import { Box, FormControl, MenuItem, Select } from "@mui/material";
 import "./index.css";
-import { styled } from "@mui/system";
 import { useState } from "react";
-
-const StyledInput = styled(TextField, {
-  name: "InputFields",
-})({ width: "120px !important" });
-const StyledInputLabel = styled(InputLabel, {
-  name: "InputLable",
-})({ color: "#fff" });
+import { StyledInput, StyledInputLabel } from "./index.styled.js";
 
 export default ({ state, dispatch }) => {
   const [tag, setTag] = useState("");
