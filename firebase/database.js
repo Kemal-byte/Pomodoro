@@ -69,7 +69,7 @@ export const dataReader = () => {
   console.log("datareader called");
   console.log(globalUser);
   if (!globalUser) return Promise.reject(new Error("No global user"));
-  const userRef = ref(db, `users/${globalUser}`);
+  const userRef = ref(db, `users/${globalUser}/2023`);
   return new Promise((resolve, reject) => {
     onValue(
       userRef,

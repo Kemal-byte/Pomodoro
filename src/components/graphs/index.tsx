@@ -1,24 +1,25 @@
 import BarChart from "./column";
 import Pie from "./piechart";
-import { dataReader } from "../../../firebase/database";
+
 import { useEffect, useState } from "react";
+import { Box, Button } from "@mui/material";
+import useData from "../../hooks/useData";
 export default () => {
   const [readData, setReadData] = useState();
-  useEffect(() => {
-    dataReader()
-      .then((data) => {
-        console.log(data);
-        setReadData(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  const [timeFrame, setTimeFrame] = useState("weekly");
+  const { yearlyData, monthlyData } = useData();
 
+  // console.log(yearlyData());
+  console.log(monthlyData());
   return (
     <div>
-      <BarChart info={readData} />
-      <Pie info={readData} />
+      <Box>
+        <Button onClick={() => setTimeFrame("monthly")}>Yearly</Button>
+        <Button onClick={() => setTimeFrame("weekly")}>Montly</Button>
+        <Button onClick={() => setTimeFrame("daily")}>Weekly</Button>
+      </Box>
+      <BarChart info={readData} timeFrame={timeFrame} />
+      <Pie info={readData} timeFrame={timeFrame} />
     </div>
   );
 };

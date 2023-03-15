@@ -29,11 +29,8 @@ export const db = getDatabase(
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
     console.log(user);
     globalUser = user.uid;
-    // const uid = user.uid;
   } else {
     globalUser = "";
   }
