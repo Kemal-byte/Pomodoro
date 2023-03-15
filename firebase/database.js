@@ -1,5 +1,4 @@
-import { onAuthStateChanged } from "firebase/auth";
-import { increment, ref, set, update } from "firebase/database";
+import { increment, onValue, ref, set, update } from "firebase/database";
 import {
   days,
   dbStructure,
@@ -7,7 +6,7 @@ import {
   months,
   WeekNames,
 } from "./databaseUtil";
-import { auth, db } from "./firebase";
+import { globalUser, db } from "./firebase";
 
 const userRef = (id) => ref(db, `users/${id}`);
 const date = new Date();
@@ -52,8 +51,6 @@ export function writeTimerData(userId, data) {
   writeMonthly(data, userId);
 }
 function writeMonthly(data, userId) {
-  // console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-  // console.log(data);
   const userRef = ref(
     db,
     `users/${userId}/${year}/${months[month]}/${WeekNames[weekNumber]}`
@@ -68,6 +65,24 @@ function writeMonthly(data, userId) {
   update(userRef, updates);
 }
 
+export const dataReader = () => {
+  console.log("datareader called");
+  console.log(globalUser);
+  if (!globalUser) return Promise.reject(new Error("No global user"));
+  const userRef = ref(db, `users/${globalUser}`);
+  return new Promise((resolve, reject) => {
+    onValue(
+      userRef,
+      (snapshot) => {
+        const data = snapshot.val();
+        resolve(data);
+      },
+      (error) => {
+        reject(error);
+      }
+    );
+  });
+};
 /**
  * Mistakes along the way.
  *

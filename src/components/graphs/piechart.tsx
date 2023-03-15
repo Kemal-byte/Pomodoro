@@ -1,7 +1,7 @@
 import React from "react";
 import { DonutChart } from "@tremor/react";
 
-export default () => {
+export default ({ info }) => {
   const cities = [
     {
       name: "New York",

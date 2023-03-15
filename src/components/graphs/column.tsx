@@ -1,7 +1,7 @@
 import React from "react";
 import { BarChart } from "@tremor/react";
 
-export default () => {
+export default ({ info }) => {
   const chartdata = [
     {
       name: "Mon",

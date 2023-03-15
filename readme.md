@@ -23,3 +23,5 @@ This is a simple pomodoro app. It will be easy to use easy to track the number o
 - Date is 1 day off on Fri day it pushes the data to Sat.[done]
 
 - SO far data write is finished. Now I need to retrive the data and visulize it.
+- Timer doesn't continue when swtich to other tabs.
+- When checking the graph or settings timer finished immediatelly.
