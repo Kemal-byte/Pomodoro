@@ -38,16 +38,15 @@ const useData = () => {
    * @returns {Array}
    */
   const monthlyData = () => {
-    // debugger;
     let monthsArray = [];
     if (!allData) return;
     for (let key in allData.Apr) {
-      // console.log(key, allData.Apr[key].weeklyTotal);
-      if (!key == "monthlyTotal" || !key == "monthlyCategories") {
+      if (key !== "monthlyTotal" && key !== "monthlyCategories") {
+        // console.log(key, allData.Apr[key].weeklyTotal);
         monthsArray.push({ [key]: allData.Apr[key].weeklyTotal });
       }
     }
-    console.log(monthsArray);
+    // console.log(monthsArray);
     return monthsArray;
   };
 
