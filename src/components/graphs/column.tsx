@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { BarChart } from "@tremor/react";
 
-export default ({ info, timeFrame, yearlyData }) => {
+export default ({ info, timeFrame, yearlyData, monthlyData }) => {
   console.log(yearlyData());
   const dete = yearlyData();
+  const aylikVeri = monthlyData();
+  const cleanAylik = aylikVeri?.filter(
+    (item) => item.week !== "monthlyCategories"
+  );
 
   const chartdata = [
     {
@@ -107,14 +111,36 @@ export default ({ info, timeFrame, yearlyData }) => {
 
   return (
     <>
-      <BarChart
-        data={dete}
-        dataKey="month"
-        categories={["monthlyTotal"]}
-        colors={["blue"]}
-        marginTop="mt-6"
-        yAxisWidth="w-12"
-      />
+      {timeFrame === "monthly" && (
+        <BarChart
+          data={dete}
+          dataKey="month"
+          categories={["monthlyTotal"]}
+          colors={["blue"]}
+          marginTop="mt-6"
+          yAxisWidth="w-12"
+        />
+      )}
+      {timeFrame === "weekly" && (
+        <BarChart
+          data={cleanAylik || weeklyData}
+          dataKey="week"
+          categories={["duration"]}
+          colors={["blue"]}
+          marginTop="mt-6"
+          yAxisWidth="w-12"
+        />
+      )}
+      {timeFrame === "daily" && (
+        <BarChart
+          data={chartdata}
+          dataKey="name"
+          categories={["Focus Time"]}
+          colors={["blue"]}
+          marginTop="mt-6"
+          yAxisWidth="w-12"
+        />
+      )}
     </>
   );
 };

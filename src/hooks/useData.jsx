@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { dataReader } from "../../firebase/database";
+import { months } from "../../firebase/databaseUtil";
 const useData = () => {
   const [allData, setAllData] = useState();
   useEffect(() => {
@@ -28,6 +29,9 @@ const useData = () => {
         monthlyCategories: allData[key]?.monthlyCategories,
       });
     }
+    yearsArray.sort((a, b) => {
+      return months.indexOf(a.month) - months.indexOf(b.month);
+    });
     return yearsArray;
   };
 
@@ -37,11 +41,17 @@ const useData = () => {
    */
   const monthlyData = () => {
     let monthsArray = [];
+    const currentMonth = new Date().getMonth();
+    console.log(months[currentMonth]);
     if (!allData) return;
-    for (let key in allData.Apr) {
-      if (key !== "monthlyTotal" && key !== "monthlyCategories") {
+    for (let key in allData[months[currentMonth]]) {
+      if (key !== "monthlyTotal") {
         // console.log(key, allData.Apr[key].weeklyTotal);
-        monthsArray.push({ [key]: allData.Apr[key].weeklyTotal });
+        monthsArray.push({
+          week: key,
+          duration: allData[months[currentMonth]][key].weeklyTotal,
+          categories: allData[months[currentMonth]].monthlyCategories,
+        });
       }
     }
     // console.log(monthsArray);

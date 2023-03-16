@@ -19,7 +19,12 @@ export default () => {
         <Button onClick={() => setTimeFrame("weekly")}>Montly</Button>
         <Button onClick={() => setTimeFrame("daily")}>Weekly</Button>
       </Box>
-      <BarChart info={readData} timeFrame={timeFrame} yearlyData={yearlyData} />
+      <BarChart
+        info={readData}
+        timeFrame={timeFrame}
+        yearlyData={yearlyData}
+        monthlyData={monthlyData}
+      />
       <Pie info={readData} timeFrame={timeFrame} />
     </div>
   );
