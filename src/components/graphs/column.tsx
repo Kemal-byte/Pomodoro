@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BarChart } from "@tremor/react";
 
-export default ({ info, timeFrame }) => {
+export default ({ info, timeFrame, yearlyData }) => {
+  console.log(yearlyData());
+  const dete = yearlyData();
+
   const chartdata = [
     {
       name: "Mon",
@@ -105,9 +108,9 @@ export default ({ info, timeFrame }) => {
   return (
     <>
       <BarChart
-        data={timeFrame == "monthly" ? monthData : weeklyData}
-        dataKey="name"
-        categories={["Focus Time"]}
+        data={dete}
+        dataKey="month"
+        categories={["monthlyTotal"]}
         colors={["blue"]}
         marginTop="mt-6"
         yAxisWidth="w-12"

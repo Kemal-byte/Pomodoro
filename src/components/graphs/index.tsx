@@ -11,6 +11,7 @@ export default () => {
 
   // console.log(yearlyData());
   console.log(monthlyData());
+  console.log(yearlyData());
   return (
     <div>
       <Box>
@@ -18,7 +19,7 @@ export default () => {
         <Button onClick={() => setTimeFrame("weekly")}>Montly</Button>
         <Button onClick={() => setTimeFrame("daily")}>Weekly</Button>
       </Box>
-      <BarChart info={readData} timeFrame={timeFrame} />
+      <BarChart info={readData} timeFrame={timeFrame} yearlyData={yearlyData} />
       <Pie info={readData} timeFrame={timeFrame} />
     </div>
   );

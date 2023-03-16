@@ -23,10 +23,9 @@ const useData = () => {
     if (!allData) return;
     for (let key in allData) {
       yearsArray.push({
-        [key]: {
-          monthlyTotal: allData[key].monthlyTotal,
-          monthlyCategories: allData[key]?.monthlyCategories,
-        },
+        month: key,
+        monthlyTotal: allData[key].monthlyTotal,
+        monthlyCategories: allData[key]?.monthlyCategories,
       });
     }
     return yearsArray;
@@ -34,7 +33,6 @@ const useData = () => {
 
   /**
    * It returns the focus time for each week.
-   * ! Currently it returns an empty array 🥲
    * @returns {Array}
    */
   const monthlyData = () => {

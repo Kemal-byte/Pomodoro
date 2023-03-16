@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 import TaskContainer, { Task } from "./index.styled";
-export default () => {
+const TaskComponent = () => {
   /**
    * Task items are input boxes, they should be containers that include input texts
    * Dont forget to include Cross and circle icons in them.
@@ -17,3 +17,4 @@ export default () => {
     </TaskContainer>
   );
 };
+export default memo(TaskComponent);
