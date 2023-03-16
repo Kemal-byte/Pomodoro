@@ -7,11 +7,12 @@ import useData from "../../hooks/useData";
 export default () => {
   const [readData, setReadData] = useState();
   const [timeFrame, setTimeFrame] = useState("weekly");
-  const { yearlyData, monthlyData } = useData();
+  const { yearlyData, monthlyData, weeklyData } = useData();
 
   // console.log(yearlyData());
-  console.log(monthlyData());
-  console.log(yearlyData());
+  // console.log(monthlyData());
+  // console.log(yearlyData());
+  console.log(weeklyData());
   return (
     <div>
       <Box>
@@ -24,6 +25,7 @@ export default () => {
         timeFrame={timeFrame}
         yearlyData={yearlyData}
         monthlyData={monthlyData}
+        weeklyData={weeklyData}
       />
       <Pie info={readData} timeFrame={timeFrame} />
     </div>

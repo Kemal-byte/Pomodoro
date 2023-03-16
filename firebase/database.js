@@ -12,7 +12,7 @@ const userRef = (id) => ref(db, `users/${id}`);
 const date = new Date();
 const year = date.getFullYear();
 const month = date.getMonth();
-const weekNumber = getWeekOfMonth(date);
+export const weekNumber = getWeekOfMonth(date);
 const dayNumber = date.getDay();
 /**
  * @function writeUserData will be called ONLY once when the user first created.

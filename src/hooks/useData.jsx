@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { dataReader } from "../../firebase/database";
-import { months } from "../../firebase/databaseUtil";
+import { months, WeekNames } from "../../firebase/databaseUtil";
+import { weekNumber } from "../../firebase/database";
 const useData = () => {
   const [allData, setAllData] = useState();
   useEffect(() => {
@@ -58,7 +59,22 @@ const useData = () => {
     return monthsArray;
   };
 
-  return { yearlyData, monthlyData };
+  const weeklyData = () => {
+    let weeklyArray = [];
+    const currentMonth = new Date().getMonth();
+    if (!allData) return;
+    for (let key in allData[months[currentMonth]][WeekNames[weekNumber]]) {
+      console.log(allData[months[currentMonth]][WeekNames[weekNumber]][key]);
+      weeklyArray.push({
+        dayName: key,
+        duration:
+          allData[months[currentMonth]][WeekNames[weekNumber]][key].dailyTotal,
+        all: allData[months[currentMonth]][WeekNames[weekNumber]][key],
+      });
+    }
+    return weeklyArray;
+  };
+  return { yearlyData, monthlyData, weeklyData };
 };
 
 export default useData;

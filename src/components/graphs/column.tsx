@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { BarChart } from "@tremor/react";
 
-export default ({ info, timeFrame, yearlyData, monthlyData }) => {
+export default ({ info, timeFrame, yearlyData, monthlyData, weeklyData }) => {
   console.log(yearlyData());
   const dete = yearlyData();
   const aylikVeri = monthlyData();
+  const haftalikVeri = weeklyData();
   const cleanAylik = aylikVeri?.filter(
     (item) => item.week !== "monthlyCategories"
+  );
+  const cleanWeekly = haftalikVeri?.filter(
+    (item) =>
+      item.dayName !== "weeklyCategories" && item.dayName !== "weeklyTotal"
   );
 
   const chartdata = [
@@ -39,7 +44,7 @@ export default ({ info, timeFrame, yearlyData, monthlyData }) => {
       "Focus Time": 743,
     },
   ];
-  const weeklyData = [
+  const haftalik = [
     {
       name: "1.week",
       "Focus Time": 743,
@@ -123,7 +128,7 @@ export default ({ info, timeFrame, yearlyData, monthlyData }) => {
       )}
       {timeFrame === "weekly" && (
         <BarChart
-          data={cleanAylik || weeklyData}
+          data={cleanAylik || haftalik}
           dataKey="week"
           categories={["duration"]}
           colors={["blue"]}
@@ -133,9 +138,9 @@ export default ({ info, timeFrame, yearlyData, monthlyData }) => {
       )}
       {timeFrame === "daily" && (
         <BarChart
-          data={chartdata}
-          dataKey="name"
-          categories={["Focus Time"]}
+          data={cleanWeekly || chartdata}
+          dataKey="dayName"
+          categories={["duration"]}
           colors={["blue"]}
           marginTop="mt-6"
           yAxisWidth="w-12"
