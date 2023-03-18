@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { DonutChart } from "@tremor/react";
 
-export default ({ info, timeFrame }) => {
+const PieComponent = ({
+  // info,
+  // timeFrame,
+  yearlyData,
+  monthlyData,
+  weeklyData,
+}) => {
+  const [currentData, setCurrentData] = useState();
   const cities = [
     {
       name: "New York",
@@ -78,17 +85,59 @@ export default ({ info, timeFrame }) => {
       sales: 100,
     },
   ];
-  const valueFormatter = (number: number) =>
-    `$ ${Intl.NumberFormat("us").format(number).toString()}`;
+  const yillik = yearlyData();
+  const aylikVeri = monthlyData();
+  const haftalikVeri = weeklyData();
+
+  const getCleanAylik = (input: any) => {
+    return new Promise((resolve, reject) => {
+      const cleanAylik = input?.filter(
+        (item) => item.week == "monthlyCategories"
+      );
+      console.log(cleanAylik);
+      if (cleanAylik) {
+        resolve(cleanAylik[0].categories);
+      } else {
+        reject("Could not get cleanAylik data");
+      }
+    });
+  };
+
+  let montlyDataReady: any[] = [];
+  useEffect(() => {
+    getCleanAylik(aylikVeri).then((data: any) => {
+      console.log("DATA IS AA", data);
+
+      if (!data) return;
+      for (let holder in data) {
+        montlyDataReady.push({
+          study: holder,
+          duration: data[holder],
+        });
+      }
+      setCurrentData(montlyDataReady);
+      console.log(montlyDataReady);
+    });
+  }, []);
+
+  // const aha = [
+  //   { study: "Reading", duration: 15 },
+  //   { study: "Study", duration: 20 },
+  // ];
   return (
-    <DonutChart
-      data={monthData}
-      category="sales"
-      dataKey="name"
-      variant="pie"
-      valueFormatter={valueFormatter}
-      marginTop="mt-6"
-      colors={["slate", "violet", "indigo", "rose", "cyan", "amber"]}
-    />
+    <>
+      {currentData && (
+        <DonutChart
+          data={currentData}
+          category="duration"
+          dataKey="study"
+          variant="pie"
+          marginTop="mt-6"
+          colors={["violet", "indigo", "rose", "cyan", "amber"]}
+        />
+      )}
+    </>
   );
 };
+
+export default PieComponent;
