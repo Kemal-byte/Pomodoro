@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { dataReader } from "../../firebase/database";
-import { months, WeekNames } from "../../firebase/databaseUtil";
+import { months, WeekNames, days } from "../../firebase/databaseUtil";
 import { weekNumber } from "../../firebase/database";
 const useData = () => {
   const [allData, setAllData] = useState();
@@ -55,7 +55,9 @@ const useData = () => {
         });
       }
     }
-    // console.log(monthsArray);
+    monthsArray.sort((a, b) => {
+      return WeekNames.indexOf(a.week) - WeekNames.indexOf(b.week);
+    });
     return monthsArray;
   };
 
@@ -72,6 +74,9 @@ const useData = () => {
         all: allData[months[currentMonth]][WeekNames[weekNumber]][key],
       });
     }
+    weeklyArray.sort((a, b) => {
+      return days.indexOf(a.dayName) - days.indexOf(b.dayName);
+    });
     return weeklyArray;
   };
   return { yearlyData, monthlyData, weeklyData };
