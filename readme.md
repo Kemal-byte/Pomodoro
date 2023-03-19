@@ -25,3 +25,5 @@ This is a simple pomodoro app. It will be easy to use easy to track the number o
 - SO far data write is finished. Now I need to retrive the data and visulize it.
 - Timer doesn't continue when swtich to other tabs.
 - When checking the graph or settings timer finished immediatelly.
+- Currently for the pie chart, the refined data isn't immediately available, it appears after the ui is loaded,
+  so I can't see the results. But after refresing the piechart.tsx, the chart appears correctly.

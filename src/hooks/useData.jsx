@@ -7,7 +7,7 @@ const useData = () => {
   useEffect(() => {
     dataReader()
       .then((data) => {
-        console.log({ ...data });
+        // console.log({ ...data });
         setAllData(data);
       })
       .catch((error) => {
@@ -20,7 +20,7 @@ const useData = () => {
    * @returns {Array}
    */
   const yearlyData = () => {
-    console.log("yearl data called");
+    // console.log("yearl data called");
     let yearsArray = [];
     if (!allData) return;
     for (let key in allData) {
@@ -43,7 +43,7 @@ const useData = () => {
   const monthlyData = () => {
     let monthsArray = [];
     const currentMonth = new Date().getMonth();
-    console.log(months[currentMonth]);
+    // console.log(months[currentMonth]);
     if (!allData) return;
     for (let key in allData[months[currentMonth]]) {
       if (key !== "monthlyTotal") {
@@ -66,7 +66,7 @@ const useData = () => {
     const currentMonth = new Date().getMonth();
     if (!allData) return;
     for (let key in allData[months[currentMonth]][WeekNames[weekNumber]]) {
-      console.log(allData[months[currentMonth]][WeekNames[weekNumber]][key]);
+      // console.log(allData[months[currentMonth]][WeekNames[weekNumber]][key]);
       weeklyArray.push({
         dayName: key,
         duration:
@@ -79,6 +79,22 @@ const useData = () => {
     });
     return weeklyArray;
   };
+
+  // const pieMonthlyData = () => {
+  //   const data = monthlyData();
+  //   let montlyDataReady = [];
+  //   let holder = data?.filter((item) => item.week == "monthlyCategories");
+  //   console.log(data);
+  //   let categories = holder[0].categories;
+
+  //   for (let holder in categories) {
+  //     montlyDataReady.push({
+  //       study: holder,
+  //       duration: categories[holder],
+  //     });
+  //   }
+  //   return montlyDataReady;
+  // };
   return { yearlyData, monthlyData, weeklyData };
 };
 

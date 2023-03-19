@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { DonutChart } from "@tremor/react";
 
 const PieComponent = ({
-  // info,
-  // timeFrame,
+  info,
+  timeFrame,
   yearlyData,
   monthlyData,
   weeklyData,
 }) => {
-  const [currentData, setCurrentData] = useState();
+  const [montlyDataReady, setMontlyDataReady] = useState([]);
+  let [aylikVeri, setAylikVeri] = useState();
   const cities = [
     {
       name: "New York",
@@ -85,16 +86,17 @@ const PieComponent = ({
       sales: 100,
     },
   ];
-  const yillik = yearlyData();
-  const aylikVeri = monthlyData();
-  const haftalikVeri = weeklyData();
+  let yillik;
+  // let aylikVeri;
 
+  let haftalikVeri;
   const getCleanAylik = (input: any) => {
     return new Promise((resolve, reject) => {
       const cleanAylik = input?.filter(
         (item) => item.week == "monthlyCategories"
       );
-      console.log(cleanAylik);
+
+      console.log("cleanAylik Data is ", cleanAylik);
       if (cleanAylik) {
         resolve(cleanAylik[0].categories);
       } else {
@@ -102,33 +104,40 @@ const PieComponent = ({
       }
     });
   };
-
-  let montlyDataReady: any[] = [];
   useEffect(() => {
+    yillik = yearlyData();
+    let holder = monthlyData();
+    setAylikVeri((prev) => (prev = holder));
+    haftalikVeri = weeklyData();
+  }, []);
+
+  useEffect(() => {
+    if (!aylikVeri) return;
+    console.log("Aylik veri before calling getClean", aylikVeri);
     getCleanAylik(aylikVeri).then((data: any) => {
       console.log("DATA IS AA", data);
 
       if (!data) return;
+      const updatedMonthlyData = [];
       for (let holder in data) {
-        montlyDataReady.push({
+        updatedMonthlyData.push({
           study: holder,
           duration: data[holder],
         });
       }
-      setCurrentData(montlyDataReady);
-      console.log(montlyDataReady);
+      setMontlyDataReady(updatedMonthlyData);
     });
-  }, []);
+  }, [aylikVeri]);
 
-  // const aha = [
-  //   { study: "Reading", duration: 15 },
-  //   { study: "Study", duration: 20 },
-  // ];
+  const aha = [
+    { study: "Reading", duration: 15 },
+    { study: "Study", duration: 20 },
+  ];
   return (
     <>
-      {currentData && (
+      {timeFrame == "weekly" && (
         <DonutChart
-          data={currentData}
+          data={montlyDataReady || aha}
           category="duration"
           dataKey="study"
           variant="pie"

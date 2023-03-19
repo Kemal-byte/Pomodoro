@@ -19,7 +19,7 @@ const dayNumber = date.getDay();
  * @param {string} userId
  */
 export function writeUserData(userId) {
-  console.log("Inside Write user Data");
+  // console.log("Inside Write user Data");
   set(userRef(userId), dbStructure);
 }
 
@@ -31,7 +31,7 @@ export function writeUserData(userId) {
 export function writeTimerData(userId, data) {
   if (userId == null || userId == undefined) return;
   console.log(userId);
-  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+  // console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
   const userRef = ref(
     db,
     `users/${userId}/${year}/${months[month]}/${WeekNames[weekNumber]}/${days[dayNumber]}`
@@ -66,7 +66,7 @@ function writeMonthly(data, userId) {
 }
 
 export const dataReader = () => {
-  console.log("datareader called");
+  // console.log("datareader called");
   console.log(globalUser);
   if (!globalUser) return Promise.reject(new Error("No global user"));
   const userRef = ref(db, `users/${globalUser}/2023`);
