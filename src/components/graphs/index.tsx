@@ -25,14 +25,7 @@ export default () => {
         allData={allData}
         cleanData={cleanData}
       />
-      <Pie
-        info={readData}
-        timeFrame={timeFrame}
-        yearlyData={yearlyData}
-        monthlyData={monthlyData}
-        weeklyData={weeklyData}
-        allData={allData}
-      />
+      <Pie timeFrame={timeFrame} cleanData={cleanData} />
     </div>
   );
 };
