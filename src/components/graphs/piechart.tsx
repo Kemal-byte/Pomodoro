@@ -11,84 +11,8 @@ const PieComponent = ({
 }) => {
   const [montlyDataReady, setMontlyDataReady] = useState([]);
   let [aylikVeri, setAylikVeri] = useState();
-  const cities = [
-    {
-      name: "New York",
-      sales: 9800,
-    },
-    {
-      name: "London",
-      sales: 4567,
-    },
-    {
-      name: "Hong Kong",
-      sales: 3908,
-    },
-    {
-      name: "San Francisco",
-      sales: 2400,
-    },
-    {
-      name: "Singapore",
-      sales: 1908,
-    },
-    {
-      name: "Zurich",
-      sales: 1398,
-    },
-  ];
-  const monthData = [
-    {
-      name: "Ocak",
-      sales: 500,
-    },
-    {
-      name: "Subat",
-      sales: 500,
-    },
-    {
-      name: "Mart",
-      sales: 900,
-    },
-    {
-      name: "Apr",
-      sales: 777,
-    },
-    {
-      name: "May",
-      sales: 580,
-    },
-    {
-      name: "Jun",
-      sales: 590,
-    },
-    {
-      name: "July",
-      sales: 150,
-    },
-    {
-      name: "Aug",
-      sales: 300,
-    },
-    {
-      name: "Sep",
-      sales: 400,
-    },
-    {
-      name: "Oct",
-      sales: 700,
-    },
-    {
-      name: "Nov",
-      sales: 200,
-    },
-    {
-      name: "Dec",
-      sales: 100,
-    },
-  ];
+
   let yillik;
-  // let aylikVeri;
 
   let haftalikVeri;
   const getCleanAylik = (input: any) => {
@@ -108,12 +32,9 @@ const PieComponent = ({
   useEffect(() => {
     if (!allData) return;
     yillik = yearlyData();
-    // let holder = monthlyData();
     monthlyData()
       .then((data) => setAylikVeri(data))
       .catch((err) => console.log(err));
-    // console.log("Holder data is ", holder);
-    // setAylikVeri(holder);
     haftalikVeri = weeklyData();
   }, [allData]);
 
@@ -136,15 +57,11 @@ const PieComponent = ({
     });
   }, [aylikVeri]);
 
-  const aha = [
-    { study: "Reading", duration: 15 },
-    { study: "Study", duration: 20 },
-  ];
   return (
     <>
       {timeFrame == "weekly" && (
         <DonutChart
-          data={montlyDataReady || aha}
+          data={montlyDataReady}
           category="duration"
           dataKey="study"
           variant="pie"
