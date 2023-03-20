@@ -7,7 +7,7 @@ import useData from "../../hooks/useData";
 export default () => {
   const [readData, setReadData] = useState();
   const [timeFrame, setTimeFrame] = useState("weekly");
-  const { yearlyData, monthlyData, weeklyData, allData } = useData();
+  const { yearlyData, monthlyData, weeklyData, allData, cleanData } = useData();
 
   return (
     <div>
@@ -23,6 +23,7 @@ export default () => {
         monthlyData={monthlyData}
         weeklyData={weeklyData}
         allData={allData}
+        cleanData={cleanData}
       />
       <Pie
         info={readData}

@@ -8,34 +8,20 @@ export default ({
   monthlyData,
   weeklyData,
   allData,
+  cleanData,
 }) => {
-  // console.log(yearlyData());
-  const dete = yearlyData();
-  const [ay, setAy] = useState();
-  let aylikVeri;
-
-  const haftalikVeri = weeklyData();
-  let cleanAylik;
-  const cleanWeekly = haftalikVeri?.filter(
-    (item) =>
-      item.dayName !== "weeklyCategories" && item.dayName !== "weeklyTotal"
-  );
   useEffect(() => {
-    if (!allData) return;
-    monthlyData()
-      .then((data) => {
-        cleanAylik = data?.filter((item) => item.week !== "monthlyCategories");
-        console.log(cleanAylik);
-        setAy(cleanAylik);
-      })
-      .catch((err) => console.log(err));
-  }, [allData]);
+    console.log("WeeklyPie is honey", cleanData);
+  }, [cleanData]);
 
+  if (!cleanData) {
+    return <div>Loading...</div>;
+  }
   return (
     <>
       {timeFrame === "monthly" && (
         <BarChart
-          data={dete}
+          data={cleanData.yearly}
           dataKey="month"
           categories={["monthlyTotal"]}
           colors={["blue"]}
@@ -45,7 +31,7 @@ export default ({
       )}
       {timeFrame === "weekly" && (
         <BarChart
-          data={ay}
+          data={cleanData.monthly}
           dataKey="week"
           categories={["duration"]}
           colors={["blue"]}
@@ -55,7 +41,7 @@ export default ({
       )}
       {timeFrame === "daily" && (
         <BarChart
-          data={cleanWeekly}
+          data={cleanData.weekly}
           dataKey="dayName"
           categories={["duration"]}
           colors={["blue"]}
