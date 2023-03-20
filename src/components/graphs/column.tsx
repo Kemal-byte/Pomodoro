@@ -1,18 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { BarChart, Card } from "@tremor/react";
 
-export default ({ info, timeFrame, yearlyData, monthlyData, weeklyData }) => {
+export default ({
+  info,
+  timeFrame,
+  yearlyData,
+  monthlyData,
+  weeklyData,
+  allData,
+}) => {
   // console.log(yearlyData());
   const dete = yearlyData();
-  const aylikVeri = monthlyData();
+  const [ay, setAy] = useState();
+  let aylikVeri;
+
   const haftalikVeri = weeklyData();
-  const cleanAylik = aylikVeri?.filter(
-    (item) => item.week !== "monthlyCategories"
-  );
+  let cleanAylik;
   const cleanWeekly = haftalikVeri?.filter(
     (item) =>
       item.dayName !== "weeklyCategories" && item.dayName !== "weeklyTotal"
   );
+  useEffect(() => {
+    if (!allData) return;
+    monthlyData()
+      .then((data) => {
+        cleanAylik = data?.filter((item) => item.week !== "monthlyCategories");
+        console.log(cleanAylik);
+        setAy(cleanAylik);
+      })
+      .catch((err) => console.log(err));
+  }, [allData]);
 
   return (
     <>
@@ -28,7 +45,7 @@ export default ({ info, timeFrame, yearlyData, monthlyData, weeklyData }) => {
       )}
       {timeFrame === "weekly" && (
         <BarChart
-          data={cleanAylik}
+          data={ay}
           dataKey="week"
           categories={["duration"]}
           colors={["blue"]}

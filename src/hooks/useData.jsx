@@ -7,7 +7,6 @@ const useData = () => {
   useEffect(() => {
     dataReader()
       .then((data) => {
-        // console.log({ ...data });
         setAllData(data);
       })
       .catch((error) => {
@@ -40,25 +39,31 @@ const useData = () => {
    * It returns the focus time for each week.
    * @returns {Array}
    */
+
   const monthlyData = () => {
-    let monthsArray = [];
-    const currentMonth = new Date().getMonth();
-    // console.log(months[currentMonth]);
-    if (!allData) return;
-    for (let key in allData[months[currentMonth]]) {
-      if (key !== "monthlyTotal") {
-        // console.log(key, allData.Apr[key].weeklyTotal);
-        monthsArray.push({
-          week: key,
-          duration: allData[months[currentMonth]][key].weeklyTotal,
-          categories: allData[months[currentMonth]].monthlyCategories,
-        });
+    // console.trace("Show me");
+    return new Promise((resolve, reject) => {
+      let monthsArray = [];
+      const currentMonth = new Date().getMonth();
+      // console.log(months[currentMonth]);
+      if (!allData) {
+        reject(new Error("No data available"));
       }
-    }
-    monthsArray.sort((a, b) => {
-      return WeekNames.indexOf(a.week) - WeekNames.indexOf(b.week);
+      for (let key in allData[months[currentMonth]]) {
+        if (key !== "monthlyTotal") {
+          // console.log(key, allData.Apr[key].weeklyTotal);
+          monthsArray.push({
+            week: key,
+            duration: allData[months[currentMonth]][key].weeklyTotal,
+            categories: allData[months[currentMonth]].monthlyCategories,
+          });
+        }
+      }
+      monthsArray.sort((a, b) => {
+        return WeekNames.indexOf(a.week) - WeekNames.indexOf(b.week);
+      });
+      resolve(monthsArray);
     });
-    return monthsArray;
   };
 
   const weeklyData = () => {
@@ -95,7 +100,7 @@ const useData = () => {
   //   }
   //   return montlyDataReady;
   // };
-  return { yearlyData, monthlyData, weeklyData };
+  return { yearlyData, monthlyData, weeklyData, allData };
 };
 
 export default useData;

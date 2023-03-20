@@ -7,6 +7,7 @@ const PieComponent = ({
   yearlyData,
   monthlyData,
   weeklyData,
+  allData,
 }) => {
   const [montlyDataReady, setMontlyDataReady] = useState([]);
   let [aylikVeri, setAylikVeri] = useState();
@@ -105,13 +106,19 @@ const PieComponent = ({
     });
   };
   useEffect(() => {
+    if (!allData) return;
     yillik = yearlyData();
-    let holder = monthlyData();
-    setAylikVeri((prev) => (prev = holder));
+    // let holder = monthlyData();
+    monthlyData()
+      .then((data) => setAylikVeri(data))
+      .catch((err) => console.log(err));
+    // console.log("Holder data is ", holder);
+    // setAylikVeri(holder);
     haftalikVeri = weeklyData();
-  }, []);
+  }, [allData]);
 
   useEffect(() => {
+    console.log("Aylik veri inside 2. useEffect", aylikVeri);
     if (!aylikVeri) return;
     console.log("Aylik veri before calling getClean", aylikVeri);
     getCleanAylik(aylikVeri).then((data: any) => {
