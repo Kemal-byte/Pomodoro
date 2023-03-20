@@ -7,7 +7,7 @@ import useData from "../../hooks/useData";
 export default () => {
   const [readData, setReadData] = useState();
   const [timeFrame, setTimeFrame] = useState("weekly");
-  const { yearlyData, monthlyData, weeklyData, allData, cleanData } = useData();
+  const { cleanData } = useData();
 
   return (
     <div>
@@ -16,15 +16,7 @@ export default () => {
         <Button onClick={() => setTimeFrame("weekly")}>Montly</Button>
         <Button onClick={() => setTimeFrame("daily")}>Weekly</Button>
       </Box>
-      <BarChart
-        info={readData}
-        timeFrame={timeFrame}
-        yearlyData={yearlyData}
-        monthlyData={monthlyData}
-        weeklyData={weeklyData}
-        allData={allData}
-        cleanData={cleanData}
-      />
+      <BarChart timeFrame={timeFrame} cleanData={cleanData} />
       <Pie timeFrame={timeFrame} cleanData={cleanData} />
     </div>
   );

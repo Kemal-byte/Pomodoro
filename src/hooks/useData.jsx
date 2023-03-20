@@ -103,8 +103,9 @@ const useData = () => {
   };
 
   /**
-   * It returns the focus time for each week.
+   * A promise that returns the focus time for each week.
    * @returns {Array}
+   * @example [{week: "Week 1", duration: 120, categories: {study: 120, work: 0, etc...}}, {week: "Week 2", duration: 60, categories: {study: 60, work: 0, etc...}}]
    */
 
   const monthlyData = () => {
@@ -130,6 +131,11 @@ const useData = () => {
     });
   };
 
+  /**
+   * It returns the daily focus time for each day of the week.
+   * @returns {Array}
+   * @example [{dayName: "Monday", duration: 120}, {dayName: "Tuesday", duration: 60}]
+   */
   const weeklyData = () => {
     return new Promise((resolve, reject) => {
       let weeklyArray = [];
@@ -153,7 +159,7 @@ const useData = () => {
     });
   };
 
-  return { yearlyData, monthlyData, weeklyData, allData, cleanData };
+  return { cleanData };
 };
 
 export default useData;

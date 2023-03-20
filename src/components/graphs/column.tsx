@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BarChart, Card } from "@tremor/react";
 
-export default ({
-  info,
-  timeFrame,
-  yearlyData,
-  monthlyData,
-  weeklyData,
-  allData,
-  cleanData,
-}) => {
+export default ({ timeFrame, cleanData }) => {
   useEffect(() => {
     console.log("WeeklyPie is honey", cleanData);
   }, [cleanData]);
