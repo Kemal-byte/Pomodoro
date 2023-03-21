@@ -13,13 +13,15 @@ const useData = () => {
     weeklyPie: null,
   });
   useEffect(() => {
-    dataReader()
-      .then((data) => {
+    const initialData = async () => {
+      try {
+        const data = await dataReader();
         setAllData(data);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error(error);
-      });
+      }
+    };
+    initialData();
   }, []);
 
   useEffect(() => {
@@ -38,7 +40,7 @@ const useData = () => {
         )
       ),
       monthlyData()
-        .then((data) => console.log(data))
+        .then((data) => getCleanAylik(data))
         .then((data) => {
           if (!data) return;
           const updatedMonthlyData = [];
@@ -72,17 +74,17 @@ const useData = () => {
   function sorting(data, arg) {
     let holder;
     if (arg == "monthly") {
-      holder = data.sort((a, b) => {
-        return WeekNames.indexOf(a.week) - WeekNames.indexOf(b.week);
-      });
+      holder = data.sort(
+        (a, b) => WeekNames.indexOf(a.week) - WeekNames.indexOf(b.week)
+      );
     } else if (arg == "yearly") {
-      holder = data.sort((a, b) => {
-        return months.indexOf(a.month) - months.indexOf(b.month);
-      });
+      holder = data.sort(
+        (a, b) => months.indexOf(a.month) - months.indexOf(b.month)
+      );
     } else {
-      holder = data.sort((a, b) => {
-        return days.indexOf(a.dayName) - days.indexOf(b.dayName);
-      });
+      holder = data.sort(
+        (a, b) => days.indexOf(a.dayName) - days.indexOf(b.dayName)
+      );
     }
     return holder;
   }
@@ -96,7 +98,7 @@ const useData = () => {
       const cleanAylik = input?.filter(
         (item) => item.week == "monthlyCategories"
       );
-      console.log("Clean aylik iste", cleanAylik);
+      // console.log("Clean aylik iste", cleanAylik);
       if (cleanAylik) {
         resolve(cleanAylik[0].categories);
       } else {
@@ -142,7 +144,7 @@ const useData = () => {
       let monthsArray = [];
       const baseNode = () => allData[months[currentMonth]];
       const baseHolder = baseNode();
-      console.log("BaseHolder monthlyData", baseHolder);
+
       for (let key in baseHolder) {
         if (key !== "monthlyTotal") {
           monthsArray.push({
@@ -153,10 +155,6 @@ const useData = () => {
         }
       }
       const sorted = sorting(monthsArray, "monthly");
-      // monthsArray.sort((a, b) => {
-      //   return WeekNames.indexOf(a.week) - WeekNames.indexOf(b.week);
-      // });
-      console.log("&&&&&&&&&&&&&&&&&", sorted);
       resolve(sorted);
     });
   };
@@ -168,10 +166,10 @@ const useData = () => {
    */
   const weeklyData = () => {
     return new Promise((resolve, reject) => {
+      if (!allData) return reject(new Error("No data available"));
       let weeklyArray = [];
       const base = () => allData[months[currentMonth]][WeekNames[weekNumber]];
       const baseHolder = base();
-      if (!allData) return reject(new Error("No data available"));
 
       for (let key in baseHolder) {
         weeklyArray.push({
