@@ -1,44 +1,31 @@
-import React, { useEffect, useState } from "react";
 import { DonutChart } from "@tremor/react";
+import { useEffect, useState } from "react";
 
 const PieComponent = ({ timeFrame, cleanData }) => {
-  if (!cleanData?.montlyPie) {
+  const [localState, setLocalState] = useState();
+
+  useEffect(() => {
+    if (timeFrame === "weekly") {
+      setLocalState(cleanData?.weeklyPie);
+    } else if (timeFrame === "monthly") {
+      setLocalState(cleanData?.montlyPie);
+    } else {
+      setLocalState(cleanData?.yearlyPie);
+    }
+  }, [timeFrame]);
+  console.log(localState);
+  if (!localState) {
     return <div>Loading...</div>;
   }
-  console.log(cleanData);
   return (
-    <>
-      {timeFrame == "yearly" && (
-        <DonutChart
-          data={cleanData.yearlyPie}
-          category="duration"
-          dataKey="study"
-          variant="pie"
-          marginTop="mt-6"
-          colors={["violet", "indigo", "rose", "cyan", "amber"]}
-        />
-      )}
-      {timeFrame == "monthly" && (
-        <DonutChart
-          data={cleanData.montlyPie}
-          category="duration"
-          dataKey="study"
-          variant="pie"
-          marginTop="mt-6"
-          colors={["violet", "indigo", "rose", "cyan", "amber"]}
-        />
-      )}
-      {timeFrame == "weekly" && (
-        <DonutChart
-          data={cleanData.weeklyPie}
-          category="duration"
-          dataKey="study"
-          variant="pie"
-          marginTop="mt-6"
-          colors={["violet", "indigo", "rose", "cyan", "amber"]}
-        />
-      )}
-    </>
+    <DonutChart
+      data={localState}
+      category="duration"
+      dataKey="study"
+      variant="pie"
+      marginTop="mt-6"
+      colors={["violet", "indigo", "rose", "cyan", "amber"]}
+    />
   );
 };
 

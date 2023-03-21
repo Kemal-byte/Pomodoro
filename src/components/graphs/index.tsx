@@ -1,11 +1,10 @@
 import BarChart from "./column";
 import Pie from "./piechart";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Box, Button } from "@mui/material";
 import useData from "../../hooks/useData";
 export default () => {
-  const [readData, setReadData] = useState();
   const [timeFrame, setTimeFrame] = useState("weekly");
   const { cleanData } = useData();
 

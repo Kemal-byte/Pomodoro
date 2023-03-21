@@ -27,4 +27,6 @@ This is a simple pomodoro app. It will be easy to use easy to track the number o
 - When checking the graph or settings timer finished immediatelly.
 - Currently for the pie chart, the refined data isn't immediately available, it appears after the ui is loaded,
   so I can't see the results. But after refresing the piechart.tsx, the chart appears correctly.[done]
-- When writing the data I don't have a yearly categories section.
+- When writing the data I don't have a yearly categories section.[done]
+- There are 3 component for each options, it should be only one.
+- No way to add custom tags.
