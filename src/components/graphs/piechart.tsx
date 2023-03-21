@@ -2,24 +2,15 @@ import React, { useEffect, useState } from "react";
 import { DonutChart } from "@tremor/react";
 
 const PieComponent = ({ timeFrame, cleanData }) => {
-  if (!cleanData?.weeklyPie) {
+  if (!cleanData?.montlyPie) {
     return <div>Loading...</div>;
   }
+  console.log(cleanData);
   return (
     <>
-      {timeFrame == "weekly" && (
-        <DonutChart
-          data={cleanData.weeklyPie}
-          category="duration"
-          dataKey="study"
-          variant="pie"
-          marginTop="mt-6"
-          colors={["violet", "indigo", "rose", "cyan", "amber"]}
-        />
-      )}
       {timeFrame == "yearly" && (
         <DonutChart
-          data={cleanData.weeklyPie}
+          data={cleanData.yearlyPie}
           category="duration"
           dataKey="study"
           variant="pie"
@@ -27,7 +18,17 @@ const PieComponent = ({ timeFrame, cleanData }) => {
           colors={["violet", "indigo", "rose", "cyan", "amber"]}
         />
       )}
-      {timeFrame == "daily" && (
+      {timeFrame == "monthly" && (
+        <DonutChart
+          data={cleanData.montlyPie}
+          category="duration"
+          dataKey="study"
+          variant="pie"
+          marginTop="mt-6"
+          colors={["violet", "indigo", "rose", "cyan", "amber"]}
+        />
+      )}
+      {timeFrame == "weekly" && (
         <DonutChart
           data={cleanData.weeklyPie}
           category="duration"

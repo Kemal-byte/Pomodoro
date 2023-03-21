@@ -11,7 +11,7 @@ export default ({ timeFrame, cleanData }) => {
   }
   return (
     <>
-      {timeFrame === "monthly" && (
+      {timeFrame === "yearly" && (
         <BarChart
           data={cleanData.yearly}
           dataKey="month"
@@ -21,7 +21,7 @@ export default ({ timeFrame, cleanData }) => {
           yAxisWidth="w-12"
         />
       )}
-      {timeFrame === "weekly" && (
+      {timeFrame === "monthly" && (
         <BarChart
           data={cleanData.monthly}
           dataKey="week"
@@ -31,7 +31,7 @@ export default ({ timeFrame, cleanData }) => {
           yAxisWidth="w-12"
         />
       )}
-      {timeFrame === "daily" && (
+      {timeFrame === "weekly" && (
         <BarChart
           data={cleanData.weekly}
           dataKey="dayName"

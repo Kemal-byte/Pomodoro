@@ -49,6 +49,7 @@ export function writeTimerData(userId, data) {
     [`monthlyCategories/${data?.tag}`]: increment(data?.sets * data?.timer),
   });
   writeMonthly(data, userId);
+  yearlyData(data, userId);
 }
 function writeMonthly(data, userId) {
   const userRef = ref(
@@ -65,8 +66,16 @@ function writeMonthly(data, userId) {
   update(userRef, updates);
 }
 
+export function yearlyData(data, userId) {
+  const userRef = ref(db, `users/${userId}/${year}`);
+  let updates = {
+    yearlyTotal: increment(data?.sets * data?.timer),
+    [`yearlyCategories/${data?.tag}`]: increment(data?.sets * data?.timer),
+  };
+  update(userRef, updates);
+}
+
 export const dataReader = () => {
-  // console.log("datareader called");
   console.log(globalUser);
   if (!globalUser) return Promise.reject(new Error("No global user"));
   const userRef = ref(db, `users/${globalUser}/2023`);

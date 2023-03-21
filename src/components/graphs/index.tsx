@@ -12,9 +12,9 @@ export default () => {
   return (
     <div>
       <Box>
-        <Button onClick={() => setTimeFrame("monthly")}>Yearly</Button>
-        <Button onClick={() => setTimeFrame("weekly")}>Montly</Button>
-        <Button onClick={() => setTimeFrame("daily")}>Weekly</Button>
+        <Button onClick={() => setTimeFrame("yearly")}>Yearly</Button>
+        <Button onClick={() => setTimeFrame("monthly")}>Montly</Button>
+        <Button onClick={() => setTimeFrame("weekly")}>Weekly</Button>
       </Box>
       <BarChart timeFrame={timeFrame} cleanData={cleanData} />
       <Pie timeFrame={timeFrame} cleanData={cleanData} />

@@ -31,14 +31,18 @@ const useData = () => {
       monthlyDataWithouCategories(),
       yearlyData(),
       weeklyDataInfo(),
+      monthlyPieData(),
       weeklyPieData(),
+      yearlyPieData(),
     ])
-      .then(([cleanAylik, yil, hafta, weeklyPie]) => {
+      .then(([cleanAylik, yil, hafta, montlyPie, weeklyPie, yearlyPie]) => {
         setCleanData({
           monthly: cleanAylik,
           yearly: yil,
           weekly: hafta,
+          montlyPie: montlyPie,
           weeklyPie: weeklyPie,
+          yearlyPie: yearlyPie,
         });
       })
       .catch((err) => console.log(err));
@@ -48,15 +52,37 @@ const useData = () => {
     const data = await monthlyData();
     return data?.filter((item) => item.week !== "monthlyCategories");
   }
-  async function weeklyPieData() {
+  async function yearlyPieData() {
+    return new Promise((resolve, reject) => {
+      let holder = [];
+      if (!allData) return reject(new Error("No data available"));
+      for (let key in allData) {
+        if (key == "yearlyCategories") {
+          // console.log(allData[key]);
+          for (let item in allData[key]) {
+            holder.push({
+              study: item,
+              duration: allData[key][item],
+            });
+          }
+        }
+      }
+      resolve(holder);
+    });
+  }
+  async function monthlyPieData() {
     const updatedMonthlyData = [];
     try {
       const data = await monthlyData();
-      const cleanData = await getCleanAylik(data);
-      for (let holder in cleanData) {
+      const cleanAylik = data?.filter(
+        (item) => item.week == "monthlyCategories"
+      );
+      let cleanAylikCategories = cleanAylik[0].categories;
+
+      for (let holder in cleanAylikCategories) {
         updatedMonthlyData.push({
           study: holder,
-          duration: cleanData[holder],
+          duration: cleanAylikCategories[holder],
         });
       }
     } catch (error) {
@@ -64,10 +90,28 @@ const useData = () => {
     }
     return updatedMonthlyData;
   }
+  async function weeklyPieData() {
+    let holder = [];
+    try {
+      const data = await weeklyData();
+      let filtered = data?.filter((item) => item.dayName == "weeklyCategories");
+      let cleanWeeklyCategories = filtered[0].all;
+      for (let key in cleanWeeklyCategories) {
+        holder.push({
+          study: key,
+          duration: cleanWeeklyCategories[key],
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+    return holder;
+  }
   async function weeklyDataInfo() {
     let holder;
     try {
       const data = await weeklyData();
+      console.log("%%%%%%%%%%%%%%%%", data);
       holder = data?.filter(
         (item) =>
           item.dayName !== "weeklyCategories" && item.dayName !== "weeklyTotal"
@@ -103,22 +147,6 @@ const useData = () => {
     return holder;
   }
 
-  /**
-   * @param {Array} input - Unfiltered monthly data
-   * @returns {Promise<Array>}
-   */
-  function getCleanAylik(input) {
-    return new Promise((resolve, reject) => {
-      const cleanAylik = input?.filter(
-        (item) => item.week == "monthlyCategories"
-      );
-      if (cleanAylik) {
-        resolve(cleanAylik[0].categories);
-      } else {
-        reject("Could not get cleanAylik data");
-      }
-    });
-  }
   const currentMonth = new Date().getMonth();
 
   /**
@@ -132,11 +160,13 @@ const useData = () => {
       if (!allData) return reject(new Error("No data available"));
 
       for (let key in allData) {
-        yearsArray.push({
-          month: key,
-          monthlyTotal: allData[key].monthlyTotal,
-          monthlyCategories: allData[key]?.monthlyCategories,
-        });
+        if (key !== "yearlyCategories" && key !== "yearlyTotal") {
+          yearsArray.push({
+            month: key,
+            monthlyTotal: allData[key].monthlyTotal,
+            monthlyCategories: allData[key]?.monthlyCategories,
+          });
+        }
       }
       const sorted = sorting(yearsArray, "yearly");
       resolve(sorted);
