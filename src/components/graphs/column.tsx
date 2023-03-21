@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { BarChart } from "@tremor/react";
 
 export default ({ timeFrame, cleanData }) => {
-  const [localState, setLocalState] = useState();
+  const [localState, setLocalState] = useState(cleanData[timeFrame]);
   const [collection, setCollection] = useState({
-    dataKey: null,
-    categories: null,
+    dataKey: "week",
+    categories: ["duration"],
   });
 
   useEffect(() => {
+    if (!cleanData) return;
     if (timeFrame === "weekly") {
       setLocalState(cleanData.weekly);
       setCollection({ dataKey: "dayName", categories: ["duration"] });
@@ -19,7 +20,7 @@ export default ({ timeFrame, cleanData }) => {
       setLocalState(cleanData.yearly);
       setCollection({ dataKey: "month", categories: ["monthlyTotal"] });
     }
-  }, [timeFrame]);
+  }, [timeFrame, cleanData]);
 
   if (!localState) {
     return <div>Loading...</div>;

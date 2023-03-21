@@ -2,7 +2,7 @@ import { DonutChart } from "@tremor/react";
 import { useEffect, useState } from "react";
 
 const PieComponent = ({ timeFrame, cleanData }) => {
-  const [localState, setLocalState] = useState();
+  const [localState, setLocalState] = useState(cleanData[timeFrame]);
 
   useEffect(() => {
     if (timeFrame === "weekly") {
@@ -12,7 +12,7 @@ const PieComponent = ({ timeFrame, cleanData }) => {
     } else {
       setLocalState(cleanData?.yearlyPie);
     }
-  }, [timeFrame]);
+  }, [timeFrame, cleanData]);
   console.log(localState);
   if (!localState) {
     return <div>Loading...</div>;

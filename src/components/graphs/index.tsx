@@ -1,7 +1,7 @@
 import BarChart from "./column";
 import Pie from "./piechart";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, Button } from "@mui/material";
 import useData from "../../hooks/useData";
 export default () => {
