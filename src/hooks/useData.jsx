@@ -28,30 +28,10 @@ const useData = () => {
     if (!allData) return;
 
     Promise.all([
-      monthlyData().then((data) =>
-        data?.filter((item) => item.week !== "monthlyCategories")
-      ),
+      monthlyDataWithouCategories(),
       yearlyData(),
-      weeklyData().then((data) =>
-        data?.filter(
-          (item) =>
-            item.dayName !== "weeklyCategories" &&
-            item.dayName !== "weeklyTotal"
-        )
-      ),
-      monthlyData()
-        .then((data) => getCleanAylik(data))
-        .then((data) => {
-          if (!data) return;
-          const updatedMonthlyData = [];
-          for (let holder in data) {
-            updatedMonthlyData.push({
-              study: holder,
-              duration: data[holder],
-            });
-          }
-          return updatedMonthlyData;
-        }),
+      weeklyDataInfo(),
+      weeklyPieData(),
     ])
       .then(([cleanAylik, yil, hafta, weeklyPie]) => {
         setCleanData({
@@ -63,6 +43,40 @@ const useData = () => {
       })
       .catch((err) => console.log(err));
   }, [allData]);
+
+  async function monthlyDataWithouCategories() {
+    const data = await monthlyData();
+    return data?.filter((item) => item.week !== "monthlyCategories");
+  }
+  async function weeklyPieData() {
+    const updatedMonthlyData = [];
+    try {
+      const data = await monthlyData();
+      const cleanData = await getCleanAylik(data);
+      for (let holder in cleanData) {
+        updatedMonthlyData.push({
+          study: holder,
+          duration: cleanData[holder],
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+    return updatedMonthlyData;
+  }
+  async function weeklyDataInfo() {
+    let holder;
+    try {
+      const data = await weeklyData();
+      holder = data?.filter(
+        (item) =>
+          item.dayName !== "weeklyCategories" && item.dayName !== "weeklyTotal"
+      );
+    } catch (error) {
+      console.log(error.message);
+    }
+    return holder;
+  }
 
   /**
    * Sorting function that returns the ordered version of the retrived data
@@ -98,7 +112,6 @@ const useData = () => {
       const cleanAylik = input?.filter(
         (item) => item.week == "monthlyCategories"
       );
-      // console.log("Clean aylik iste", cleanAylik);
       if (cleanAylik) {
         resolve(cleanAylik[0].categories);
       } else {
