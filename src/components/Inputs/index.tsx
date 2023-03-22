@@ -1,7 +1,8 @@
 import { Box, FormControl, MenuItem, Select } from "@mui/material";
 import "./index.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyledInput, StyledInputLabel } from "./index.styled.js";
+import { readTags } from "../../../firebase/database";
 
 export default ({ state, dispatch }) => {
   const [tag, setTag] = useState("");
@@ -16,6 +17,19 @@ export default ({ state, dispatch }) => {
     setTag(event.target.value as string);
     dispatch({ type: "naming_tag", payload: event.target.value as string });
   };
+
+  useEffect(() => {
+    async function updateTags() {
+      const data = await readTags();
+      for (let key in data) {
+        console.log(key);
+        if (!tags.includes(key)) {
+          setTags((prev) => [...prev, key]);
+        }
+      }
+    }
+    updateTags();
+  }, []);
 
   return (
     <div className="input__container">

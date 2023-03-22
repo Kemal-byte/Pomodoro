@@ -30,8 +30,6 @@ export function writeUserData(userId) {
  */
 export function writeTimerData(userId, data) {
   if (userId == null || userId == undefined) return;
-  console.log(userId);
-  // console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
   const userRef = ref(
     db,
     `users/${userId}/${year}/${months[month]}/${WeekNames[weekNumber]}/${days[dayNumber]}`
@@ -92,6 +90,31 @@ export const dataReader = () => {
     );
   });
 };
+
+export const addNewTag = (tag) => {
+  const userRef = ref(db, `users/${globalUser}`);
+  let updates = {};
+  updates = {
+    [`tags/${tag}`]: true,
+  };
+  update(userRef, updates);
+};
+export const readTags = () => {
+  const userRef = ref(db, `users/${globalUser}/tags`);
+  return new Promise((resolve, reject) => {
+    onValue(
+      userRef,
+      (snapshot) => {
+        const data = snapshot.val();
+        resolve(data);
+      },
+      (error) => {
+        reject(error);
+      }
+    );
+  });
+};
+
 /**
  * Mistakes along the way.
  *

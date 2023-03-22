@@ -8,11 +8,17 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import "../Inputs/index.css";
+import { StyledInput } from "../Inputs/index.styled";
+import { globalUser } from "../../../firebase/firebase";
+import { addNewTag } from "../../../firebase/database";
+import { Button } from "@mui/material";
 
 export default () => {
+  console.log(globalUser);
   //TODO: Auto-Start, Sound settings, Colors
   const [auto, setAuto] = useState(true);
   const [age, setAge] = React.useState("");
+  const [newTag, setNewTag] = useState("");
 
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
@@ -58,6 +64,29 @@ export default () => {
           </FormControl>
         </Box>
       </SetItem>
+      <SetItem>
+        <Title>Add a tag</Title>
+        <StyledInput
+          variant="outlined"
+          id="number-of-sets"
+          InputLabelProps={{ sx: { color: "#fff" } }}
+          error={newTag.length > 3}
+          helperText={newTag.length > 3 && "Max 3 characters"}
+          disabled={globalUser == "" ? true : false}
+          label="New Tag"
+          type="text"
+          value={newTag}
+          placeholder="Ex. Biology"
+          onChange={(e) => setNewTag(e.target.value)}
+        />
+      </SetItem>
+      <Button
+        variant="contained"
+        disabled={globalUser == "" ? true : false}
+        onClick={() => addNewTag(newTag)}
+      >
+        Save
+      </Button>
     </SetContainer>
   );
 };
