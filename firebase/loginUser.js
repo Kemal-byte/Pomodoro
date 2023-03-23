@@ -1,9 +1,12 @@
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { writeTimerData } from "./database";
 import { auth } from "./firebase";
+import ToastifyNotification from "../src/utilities/popup";
 
+const { NotifyLogin } = ToastifyNotification();
 async function signIn(email, password) {
   console.log("Inside Sign in");
+
   let userInfo;
   try {
     const userCredential = await signInWithEmailAndPassword(
@@ -11,6 +14,7 @@ async function signIn(email, password) {
       email,
       password
     );
+    NotifyLogin("Login Successful");
     userInfo = userCredential.user;
     console.log(userInfo);
     writeTimerData();
@@ -18,6 +22,7 @@ async function signIn(email, password) {
     const errorCode = error.code;
     const errorMessage = error.message;
     console.log(errorMessage);
+    NotifyLogin("Login Failed");
   }
   console.log(userInfo);
   return userInfo;
@@ -25,5 +30,6 @@ async function signIn(email, password) {
 
 export async function logOut() {
   await signOut(auth);
+  NotifyLogin("Logged out successfully");
 }
 export default signIn;

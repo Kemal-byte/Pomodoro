@@ -11,6 +11,7 @@ import signIn, { logOut } from "../../../firebase/loginUser";
 // import userHook from "../../hooks/userHook";
 import style from "./style.js";
 import { globalUser } from "../../../firebase/firebase";
+import ToastifyNotification from "../../utilities/popup";
 
 const LoginInput = styled(TextField, {
   name: "InputFields",
@@ -23,6 +24,7 @@ export default function BasicModal() {
     email: "",
     password: "",
   });
+  const { NotifyLogin } = ToastifyNotification();
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -36,28 +38,27 @@ export default function BasicModal() {
     }
   };
   const LoginHandle = async () => {
+    console.log("globalUser", globalUser);
     if (globalUser) {
-      console.log("logged out");
       logOut();
-      console.log(globalUser);
+      handleClose();
     } else {
-      console.log("tries to log in");
       const { email, password } = user;
-      try {
-        console.log("Login handle clicked");
-        const user = await signIn(email, password);
-        // const userInfo = user ? user.uid : null;
-
-        console.log("object");
-        // setUserReducer(userInfo);
-      } catch (error) {
-        console.log(error.message);
+      const asd = await signIn(email, password);
+      if (asd) {
+        handleClose();
       }
+      console.log("asd", asd);
     }
   };
   const RegisterHandle = () => {
     const { email, password } = user;
-    createUser(email, password);
+    try {
+      createUser(email, password);
+      NotifyLogin("Account created successfully");
+    } catch (error) {
+      NotifyLogin(error.message);
+    }
   };
 
   return (

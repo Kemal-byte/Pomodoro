@@ -11,7 +11,10 @@ const ToastifyNotification = () => {
   const NotifyError = (msg: string) => {
     toast(`${msg}`);
   };
-  return { NotifySuccess, NotifyError };
+  const NotifyLogin = (msg: string) => {
+    toast(`${msg}`);
+  };
+  return { NotifySuccess, NotifyError, NotifyLogin };
 };
 
 export default ToastifyNotification;
