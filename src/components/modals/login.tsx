@@ -89,6 +89,7 @@ export default function BasicModal() {
               label="User Email"
               value={user.email}
               name="email"
+              disabled={globalUser ? true : false}
               placeholder="Enter your email address"
               onChange={(e) => handleChange(e)}
               InputLabelProps={{ sx: { color: "#fff" } }}
@@ -98,6 +99,7 @@ export default function BasicModal() {
               label="Password"
               value={user.password}
               name="password"
+              disabled={globalUser ? true : false}
               placeholder="Enter your password"
               onChange={(e) => handleChange(e)}
               InputLabelProps={{ sx: { color: "#fff" } }}
@@ -115,7 +117,7 @@ export default function BasicModal() {
               type="submit"
               onClick={isLogin ? LoginHandle : RegisterHandle}
             >
-              {isLogin ? "Login" : "Register"}
+              {globalUser ? "LogOut" : isLogin ? "Login" : "Register"}
             </Button>
             <Typography
               variant="subtitle2"

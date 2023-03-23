@@ -7,6 +7,7 @@ import useData from "../../hooks/useData";
 import { globalUser } from "../../../firebase/firebase";
 import DataImg from "../../assets/DataHolder.png";
 import PlaceHolderContainer, { PlaceHolderImg } from "./index.styled.jsx";
+import SkeletonTypography from "./skeleton";
 export default () => {
   const [timeFrame, setTimeFrame] = useState("weekly");
   const { cleanData } = useData();
@@ -27,8 +28,15 @@ export default () => {
         </>
       ) : (
         <>
-          <BarChart timeFrame={timeFrame} cleanData={cleanData} />
-          <Pie timeFrame={timeFrame} cleanData={cleanData} />
+          {cleanData ? (
+            <>
+              {" "}
+              <BarChart timeFrame={timeFrame} cleanData={cleanData} />
+              <Pie timeFrame={timeFrame} cleanData={cleanData} />{" "}
+            </>
+          ) : (
+            <SkeletonTypography />
+          )}
         </>
       )}
     </div>
