@@ -7,6 +7,7 @@ export default ({ timeFrame, cleanData }) => {
     dataKey: "week",
     categories: ["duration"],
   });
+  console.log(cleanData);
 
   useEffect(() => {
     if (!cleanData) return;

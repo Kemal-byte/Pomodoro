@@ -23,10 +23,10 @@ This is a simple pomodoro app. It will be easy to use easy to track the number o
 - Date is 1 day off on Fri day it pushes the data to Sat.[done]
 
 - SO far data write is finished. Now I need to retrive the data and visulize it.[done]
-- Timer doesn't continue when swtich to other tabs.
+- Timer doesn't continue when swtich to other tabs.[done]
 - When checking the graph or settings timer finished immediatelly.
 - Currently for the pie chart, the refined data isn't immediately available, it appears after the ui is loaded,
   so I can't see the results. But after refresing the piechart.tsx, the chart appears correctly.[done]
 - When writing the data I don't have a yearly categories section.[done]
-- There are 3 component for each options, it should be only one.
-- No way to add custom tags.
+- There are 3 component for each options, it should be only one.[done]
+- No way to add custom tags.[done]

@@ -1,4 +1,4 @@
-const chartdata = [
+export const chartdata = [
   {
     name: "Mon",
     "Focus Time": 2488,
@@ -28,7 +28,7 @@ const chartdata = [
     "Focus Time": 743,
   },
 ];
-const haftalik = [
+export const haftalik = [
   {
     name: "1.week",
     "Focus Time": 743,
@@ -46,7 +46,7 @@ const haftalik = [
     "Focus Time": 500,
   },
 ];
-const monthData = [
+export const monthData = [
   {
     name: "Ocak",
     "Focus Time": 500,
@@ -97,7 +97,7 @@ const monthData = [
     reading: 200,
   },
 ];
-const cities = [
+export const cities = [
   {
     name: "New York",
     sales: 9800,

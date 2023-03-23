@@ -5,7 +5,7 @@ import { StyledInput, StyledInputLabel } from "./index.styled.js";
 import { readTags } from "../../../firebase/database";
 
 export default ({ state, dispatch }) => {
-  const [tag, setTag] = useState("");
+  const [tag, setTag] = useState("Study");
   const [tags, setTags] = useState(["Study", "Reading", "Math", "Gym"]);
 
   const handleChange = (tip: string, val: any) => {
@@ -19,6 +19,9 @@ export default ({ state, dispatch }) => {
   };
 
   useEffect(() => {
+    /**
+     * It updates the tags array by reading it from the db.
+     */
     async function updateTags() {
       const data = await readTags();
       for (let key in data) {

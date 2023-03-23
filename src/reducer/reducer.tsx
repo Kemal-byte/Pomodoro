@@ -12,6 +12,7 @@ export const initialState: InitialState = {
   break: 1,
   timer: 25,
   started: false,
+  tags: "Study",
 };
 export type ACTIONTYPE =
   | { type: "setting_timer"; payload: number }

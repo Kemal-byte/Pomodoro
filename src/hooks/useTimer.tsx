@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ToastifyNotification from "../utilities/popup";
 import { writeTimerData } from "../../firebase/database";
 import { globalUser } from "../../firebase/firebase";
+
 type StateType = {
   timer: number;
   sets: number;
@@ -44,13 +45,14 @@ const useTimer = (state: StateType, dispatch: DispatchType) => {
       tag: state.tags,
     };
     setA(storedData);
-    console.log("Stored data is : {}", storedData);
+    // console.log("Stored data is : {}", storedData);
   }, [state.started]);
 
   useEffect(() => {
     if (timeLeft === 0) {
       setOnBreak(!onBreak);
     }
+    document.title = `${fomattedTime} left | My Pomodoro App`;
   }, [timeLeft]);
 
   useEffect(() => {
@@ -69,12 +71,14 @@ const useTimer = (state: StateType, dispatch: DispatchType) => {
   useEffect(() => {
     if (state.started === false || state.started === undefined) return;
     if (state.sets < 1) return;
-    // if (timeLeft > 1) {
-    timerRef.current = setInterval(() => {
-      setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
-    }, 10);
-    // }
-    return () => clearInterval(timerRef.current);
+    if (timeLeft > 1) {
+      timerRef.current = setInterval(() => {
+        setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
+      }, 1000);
+    }
+    return () => {
+      clearInterval(timerRef.current);
+    };
   }, [state.started]);
 
   /**
@@ -82,7 +86,6 @@ const useTimer = (state: StateType, dispatch: DispatchType) => {
    * TODO: Add a function here so it can push it to the db with the stored data.
    */
   useEffect(() => {
-    // console.log(a);
     if (state.sets < 1) {
       clearInterval(timerRef.current);
       dispatch({ type: "numberOf_reps", payload: 1 });
