@@ -14,11 +14,11 @@ export default ({ state, dispatch }) => {
   };
 
   const handleStart = () => {
-    audio.play();
-    // console.log(timerHook.checkInputs());
-    // if (!timerHook.checkInputs()) {
-    //   dispatch({ type: "started_timer", payload: !state.started });
-    // }
+    console.log(timerHook.checkInputs());
+    if (!timerHook.checkInputs()) {
+      dispatch({ type: "started_timer", payload: !state.started });
+      audio.play();
+    }
   };
 
   return (

@@ -17,5 +17,25 @@ export const PlaceHolderImg = styled.img`
   opacity: 0.4;
   z-index: 1;
 `;
+export const PieFlex = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+export const PieLegend = styled.ul`
+  list-style: none;
+  font-weight: 900;
+  text-align: left;
+`;
+export const PieLegendItem = styled.li`
+  font-weight: 900;
+`;
+export const PieLegendContainer = styled.div`
+  width: 40%;
+  min-width: 150px;
+  margin-top: 2rem;
+`;
+export const DonutContainer = styled.div`
+  width: 60%;
+`;
 
 export default PlaceHolderContainer;
