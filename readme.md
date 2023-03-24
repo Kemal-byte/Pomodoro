@@ -30,3 +30,6 @@ This is a simple pomodoro app. It will be easy to use easy to track the number o
 - When writing the data I don't have a yearly categories section.[done]
 - There are 3 component for each options, it should be only one.[done]
 - No way to add custom tags.[done]
+- Sound hasn't added yet
+- Custom color selection hasn't added yet
+- Pie chart legends hasn't added yet

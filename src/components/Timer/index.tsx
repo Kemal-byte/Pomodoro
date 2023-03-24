@@ -1,9 +1,11 @@
 import { Box, Slider } from "@mui/material";
 import TimerContainer, { Timer, TimerStart } from "./index.styled";
-import useTimer from "../../hooks/useTimer";
+import useTimer from "@/hooks/useTimer";
+import sound from "@/assets/LockSound.mp3";
 
 export default ({ state, dispatch }) => {
   const timerHook = useTimer(state, dispatch);
+  const audio = new Audio(sound);
 
   const handleChange = (e: any) => {
     if (e !== null) {
@@ -12,10 +14,11 @@ export default ({ state, dispatch }) => {
   };
 
   const handleStart = () => {
-    console.log(timerHook.checkInputs());
-    if (!timerHook.checkInputs()) {
-      dispatch({ type: "started_timer", payload: !state.started });
-    }
+    audio.play();
+    // console.log(timerHook.checkInputs());
+    // if (!timerHook.checkInputs()) {
+    //   dispatch({ type: "started_timer", payload: !state.started });
+    // }
   };
 
   return (
@@ -33,6 +36,7 @@ export default ({ state, dispatch }) => {
           onChange={(e) => handleChange(e)}
         />
       </Box>
+      <audio src="../../assets/LockedSound.mp3"></audio>
       <TimerStart onClick={handleStart}>
         {state.started ? "Pause" : "Start"}
       </TimerStart>

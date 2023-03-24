@@ -120,18 +120,22 @@ export default function BasicModal() {
             >
               {globalUser ? "LogOut" : isLogin ? "Login" : "Register"}
             </Button>
-            <Typography
-              variant="subtitle2"
-              component="h6"
-              onClick={() => setIsLogin((prev) => !prev)}
-              sx={{
-                color: Colors.primaryYellow,
-                textDecoration: "underline",
-                cursor: "pointer",
-              }}
-            >
-              {isLogin ? "Dont have an account" : "Already have an account"}
-            </Typography>
+            {globalUser || (
+              <>
+                <Typography
+                  variant="subtitle2"
+                  component="h6"
+                  onClick={() => setIsLogin((prev) => !prev)}
+                  sx={{
+                    color: Colors.primaryYellow,
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                  }}
+                >
+                  {isLogin ? "Dont have an account" : "Already have an account"}
+                </Typography>
+              </>
+            )}
           </Box>
         </Box>
       </Modal>

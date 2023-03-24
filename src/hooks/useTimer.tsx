@@ -16,6 +16,7 @@ const useTimer = (state: StateType, dispatch: DispatchType) => {
   const [timeLeft, setTimeLeft] = useState(state.timer * 60); // set initial timer value to 60 seconds
   const [onBreak, setOnBreak] = useState(false);
   const timerRef = useRef(null);
+  // const audio = new Audio("../assets/LockSound.mp3");
 
   const [a, setA] = useState({
     sets: 0,
@@ -45,7 +46,6 @@ const useTimer = (state: StateType, dispatch: DispatchType) => {
       tag: state.tags,
     };
     setA(storedData);
-    // console.log("Stored data is : {}", storedData);
   }, [state.started]);
 
   useEffect(() => {
@@ -74,7 +74,7 @@ const useTimer = (state: StateType, dispatch: DispatchType) => {
     if (timeLeft > 1) {
       timerRef.current = setInterval(() => {
         setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
-      }, 1000);
+      }, 1);
     }
     return () => {
       clearInterval(timerRef.current);
