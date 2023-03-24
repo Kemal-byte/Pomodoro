@@ -50,7 +50,10 @@ const PieComponent = ({ timeFrame, cleanData }) => {
           {localState.map((item) => (
             <PieLegendItem key={item.study}>
               <Typography
-                sx={{ color: `${myColorsArray[localState.indexOf(item)]}` }}
+                sx={{
+                  color: `${myColorsArray[localState.indexOf(item)]}`,
+                  fontWeight: "bold",
+                }}
               >
                 {`${item.study} - ${item.duration}`}
               </Typography>

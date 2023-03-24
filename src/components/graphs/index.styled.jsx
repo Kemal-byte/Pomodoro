@@ -5,7 +5,8 @@ const PlaceHolderContainer = styled.div`
   position: relative;
   margin-top: 1rem;
   width: 100%;
-  height: 500px;
+  height: 0;
+  padding-bottom: 100%;
   z-index: 2;
 `;
 export const PlaceHolderImg = styled.img`
