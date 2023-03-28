@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import SetContainer, { SetItem, Title } from "./index.styled";
+import SetContainer, {
+  ColorSelections,
+  SelectionColorsContainer,
+  SetItem,
+  Title,
+} from "./index.styled";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import Box from "@mui/material/Box";
@@ -52,14 +57,30 @@ export default () => {
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={age}
-              label="Sounds"
+              label="Colors"
               onChange={handleChange}
             >
               <MenuItem value={10} selected>
-                Ten
+                <SelectionColorsContainer>
+                  <ColorSelections color="red" />
+                  <ColorSelections color="blue" />
+                  <ColorSelections color="black" />
+                </SelectionColorsContainer>
               </MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value={20}>
+                <SelectionColorsContainer>
+                  <ColorSelections color="pink" />
+                  <ColorSelections color="cyan" />
+                  <ColorSelections color="purple" />
+                </SelectionColorsContainer>
+              </MenuItem>
+              <MenuItem value={30}>
+                <SelectionColorsContainer>
+                  <ColorSelections color="orange" />
+                  <ColorSelections color="yellow" />
+                  <ColorSelections color="grey" />
+                </SelectionColorsContainer>
+              </MenuItem>
             </Select>
           </FormControl>
         </Box>

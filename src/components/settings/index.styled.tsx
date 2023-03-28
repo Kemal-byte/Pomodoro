@@ -16,4 +16,16 @@ export const SetItem = styled.div`
 `;
 export const Title = styled.h3``;
 
+export const SelectionColorsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+`;
+export const ColorSelections = styled.div`
+  content: "";
+  height: 1rem;
+  width: 33%;
+  background-color: ${(prop) => prop.color};
+`;
+
 export default SetContainer;
