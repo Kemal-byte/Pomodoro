@@ -36,11 +36,13 @@ export default () => {
     setColorComb(event.target.value);
   };
   const handleSubmit = () => {
-    if (!newTag) {
+    console.log(newTag);
+    if (newTag !== "") {
+      console.log("addNewTag function called");
       addNewTag(newTag);
     }
     // console.log(object);
-    updateColors(colorComb);
+    // updateColors(colorComb);
   };
 
   return (

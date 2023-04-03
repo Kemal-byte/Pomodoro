@@ -92,6 +92,7 @@ export const dataReader = () => {
 };
 
 export const addNewTag = (tag) => {
+  console.log("Inside add new tag", tag);
   const userRef = ref(db, `users/${globalUser}`);
   let updates = {};
   updates = {
