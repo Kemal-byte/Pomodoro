@@ -17,17 +17,32 @@ import { StyledInput } from "../Inputs/index.styled";
 import { globalUser } from "../../../firebase/firebase";
 import { addNewTag } from "../../../firebase/database";
 import { Button } from "@mui/material";
+import {
+  updateColors,
+  comb1,
+  comb2,
+  comb3,
+} from "../../utilities/commonCss/colors";
 
 export default () => {
   console.log(globalUser);
   //TODO: Auto-Start, Sound settings, Colors
   const [auto, setAuto] = useState(true);
-  const [age, setAge] = React.useState("");
+  const [colorComb, setColorComb] = React.useState(comb1);
   const [newTag, setNewTag] = useState("");
 
   const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
+    console.log(event.target.value);
+    setColorComb(event.target.value);
   };
+  const handleSubmit = () => {
+    if (!newTag) {
+      addNewTag(newTag);
+    }
+    // console.log(object);
+    updateColors(colorComb);
+  };
+
   return (
     <SetContainer>
       <h2>Settings</h2>
@@ -56,25 +71,25 @@ export default () => {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={age}
+              value={colorComb}
               label="Colors"
               onChange={handleChange}
             >
-              <MenuItem value={10} selected>
+              <MenuItem value={comb1} selected>
                 <SelectionColorsContainer>
                   <ColorSelections color="red" />
                   <ColorSelections color="blue" />
                   <ColorSelections color="black" />
                 </SelectionColorsContainer>
               </MenuItem>
-              <MenuItem value={20}>
+              <MenuItem value={comb2}>
                 <SelectionColorsContainer>
                   <ColorSelections color="pink" />
                   <ColorSelections color="cyan" />
                   <ColorSelections color="purple" />
                 </SelectionColorsContainer>
               </MenuItem>
-              <MenuItem value={30}>
+              <MenuItem value={comb3}>
                 <SelectionColorsContainer>
                   <ColorSelections color="orange" />
                   <ColorSelections color="yellow" />
@@ -104,7 +119,7 @@ export default () => {
       <Button
         variant="contained"
         disabled={globalUser == "" ? true : false}
-        onClick={() => addNewTag(newTag)}
+        onClick={handleSubmit}
       >
         Save
       </Button>
