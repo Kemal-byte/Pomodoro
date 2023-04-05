@@ -49,16 +49,8 @@ export const TaskInput = styled.input`
   outline: none;
   @media screen and (max-width: 545px) {
     width: 90%;
-    /* height: 50px; */
     line-height: 35px;
   }
-
-  /* &:hover {
-    outline: 1px solid #fff;
-  }
-  &:focus {
-    outline: 1px solid #000000;
-  } */
 `;
 
 export const TaskButton = styled.button`
@@ -66,14 +58,16 @@ export const TaskButton = styled.button`
   height: 30px;
   border-radius: 50%;
   cursor: pointer;
-  /* padding: 0.5px; */
+  position: relative;
+  outline: solid 2px transparent; /* Add a transparent outline by default */
   &:hover {
-    outline: solid 2px #2c2713;
+    outline: solid 2px #2c2713; /* Change the color of the outline on hover */
   }
   > img {
-    margin: auto auto;
-    padding: 0;
-    width: 70%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   border: none;
 `;
