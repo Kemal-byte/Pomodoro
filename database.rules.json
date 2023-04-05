@@ -2,7 +2,11 @@
   "rules": {
     "users": {
       "$uid": {
-        "$childNodes": {
+        "2023": {
+          ".read": "$uid === auth.uid",
+          ".write": "$uid === auth.uid"
+        },
+        "tags": {
           ".read": "$uid === auth.uid",
           ".write": "$uid === auth.uid"
         }

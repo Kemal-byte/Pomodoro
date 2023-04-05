@@ -1,16 +1,16 @@
 import { createTheme, ThemeProvider } from "@mui/material";
-import { useState, useMemo, createContext } from "react";
+import { useMemo } from "react";
 import colors from "./colors";
 
 const ThemeCover = ({ children }) => {
-  const [colorPallete, setcolorPallete] = useState<any>(colors);
+  // const [colorPallete, setcolorPallete] = useState<any>(colors);
 
   const theme = useMemo(
     () =>
       createTheme({
         palette: {
           primary: {
-            main: colorPallete.primaryYellow,
+            main: colors.primaryYellow,
           },
           text: {
             primary: "#fff",
@@ -18,7 +18,7 @@ const ThemeCover = ({ children }) => {
           },
         },
       }),
-    [colorPallete]
+    [colors]
   );
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };

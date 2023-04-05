@@ -1,19 +1,50 @@
-import React, { memo } from "react";
-import TaskContainer, { Task } from "./index.styled";
+import React, { memo, useState } from "react";
+import TaskContainer, {
+  TaskButton,
+  TaskInput,
+  TaskWrapper,
+} from "./index.styled";
+import TaskItem from "./TaskItem";
 const TaskComponent = () => {
+  const [todoList, setTodoList] = useState(
+    () => JSON.parse(localStorage.getItem("todoList")) || []
+  );
+  const [task, setTask] = useState<string>("");
+
   /**
    * Task items are input boxes, they should be containers that include input texts
    * Dont forget to include Cross and circle icons in them.
    */
+  const handleChange = (e: any) => {
+    console.log(task);
+    setTask(e.target.value);
+  };
+  const addTask = (newTask: String) => {
+    const updatedList = [...todoList, newTask];
+    setTodoList(updatedList);
+    localStorage.setItem("todoList", JSON.stringify(updatedList));
+    setTask("");
+  };
+  const removeTask = (index) => {
+    const updatedList = todoList.filter((_, i) => i !== index);
+    setTodoList(updatedList);
+    localStorage.setItem("todoList", JSON.stringify(updatedList));
+  };
+
   return (
     <TaskContainer>
-      <Task defaultValue="✅ Add a new task"></Task>
-      {/* <Task defaultValue="✅ Add a new task"></Task>
-      <Task defaultValue="✅ Add a new task"></Task>
-      <Task defaultValue="✅ Add a new task"></Task>
-      <Task defaultValue="✅ Add a new task"></Task>
-      <Task defaultValue="✅ Add a new task"></Task>
-      <Task defaultValue="✅ Add a new task"></Task> */}
+      <TaskWrapper>
+        <TaskButton onClick={() => addTask(task)} />
+        <TaskInput
+          placeholder="✅ Add a new task"
+          value={task}
+          onChange={handleChange}
+        />
+      </TaskWrapper>
+
+      {todoList.map((val, index) => (
+        <TaskItem key={index} index={index} task={val} onRemove={removeTask} />
+      ))}
     </TaskContainer>
   );
 };

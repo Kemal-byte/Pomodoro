@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import Colors from "../utilities/commonCss/colors";
+// interface ContainerMainProps {
+//   bgColor: string;
+//   mainColor: string;
+// }
 
 export const ContainerMain = styled.main`
   text-align: center;
@@ -11,7 +15,7 @@ export const ContainerMain = styled.main`
   position: relative;
   overflow: auto;
 `;
-export const Container = styled.section`
+export const Container = styled.nav`
   width: 500px;
   margin: auto;
   display: flex;

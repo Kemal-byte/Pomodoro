@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import Colors from "../../utilities/commonCss/colors";
+// interface ContainerMainProps {
+//   bgColor: string;
+//   mainColor: string;
+// }
 
 const Navbar = styled.nav`
   /* ... */
@@ -14,7 +18,7 @@ export const NavItems = styled.button`
   border-radius: 5px;
   justify-content: center;
   align-items: center;
-  color: ${Colors.primaryBG};
+  color: ${Colors.primaryYellow};
   line-height: 45px;
   background-color: ${Colors.primaryYellow};
   cursor: pointer;

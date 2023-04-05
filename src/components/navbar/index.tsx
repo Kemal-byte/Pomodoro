@@ -1,14 +1,9 @@
-import React from "react";
 import Navbar, { NavItems } from "./index.styled.jsx";
 import Gear from "../../assets/Gear.svg";
 import ChartPie from "../../assets/ChartPie.svg";
 import LoginModal from "../modals/login.js";
 
 export default ({ graph, setGraph, setSettings, settings }) => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
   const handleGraph = (e) => {
     const { id } = e.target;
     //TODO: Depending on which navbar button is clicked toggle between different components.

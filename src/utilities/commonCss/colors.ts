@@ -1,12 +1,12 @@
 const colors = {
-  primaryYellow: "#E21818",
+  primaryYellow: "#FF9D16",
   primaryBG: "#25201C",
 };
 export function updateColors(newColors: string[]) {
-  console.log(colors);
+  // console.log(colors);
   const holder = { primaryYellow: newColors[0], primaryBG: newColors[1] };
   Object.assign(colors, holder);
-  console.log("updated colors: ", colors);
+  // console.log("updated colors: ", colors);
 }
 export const comb1 = ["#E21818", "#00235B"];
 export const comb2 = ["#F9F5EB", "#EA5455"];
@@ -17,21 +17,27 @@ export default colors;
 //#25201C
 // import { useState } from "react";
 
-// const useColors = () => {
+// import { useState } from "react";
+
+// export function useColors() {
 //   const [colors, setColors] = useState({
-//     primaryYellow: "#FF9D16",
+//     primaryYellow: "#E21818",
 //     primaryBG: "#25201C",
 //   });
+//   const [combinations, _] = useState({
+//     comb1: ["#E21818", "#00235B"],
+//     comb2: ["#F9F5EB", "#EA5455"],
+//     comb3: ["#BAD7E9", "#2B3467"],
+//   });
 
-//   const updateColors = (newColors: string[]) => {
+//   function updateColors(newColors: string[]) {
+//     console.log("Uupdate colors called");
 //     const holder = { primaryYellow: newColors[0], primaryBG: newColors[1] };
-//     setColors((prevColors) => Object.assign({}, prevColors, holder));
-//   };
+//     setColors((prevColors) => ({ ...prevColors, ...holder }));
+//     console.log(colors);
+//   }
 
-//   return {
-//     colors,
-//     updateColors,
-//   };
-// };
+//   return { colors, updateColors, combinations };
+// }
 
 // export default useColors;

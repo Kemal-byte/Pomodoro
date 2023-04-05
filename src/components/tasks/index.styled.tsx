@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Colors from "../../utilities/commonCss/colors";
 
 const TaskContainer = styled.div`
@@ -14,29 +14,69 @@ const TaskContainer = styled.div`
   top: -63px;
   height: auto;
 `;
-export const Task = styled.input`
-  width: 400px;
-  height: 63px;
+export const TaskWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  &:hover {
+    outline: 1px solid #fff;
+  }
+  /* &:focus {
+    outline: 1px solid #000000;
+  } */
   background-color: ${Colors.primaryYellow};
-  padding: 20px 10px;
-  font-size: 16px;
+`;
+const TaskBaseStyles = css`
+  font-size: 1rem;
   font-weight: 600;
   color: #000;
   text-align: start !important;
-  line-height: 23px;
-  border-radius: 5px;
+  line-height: 25px;
+  padding: 2px 10px;
+  background-color: transparent;
+`;
+export const TaskStyled = styled.div`
+  ${TaskBaseStyles}
+`;
+export const TaskInput = styled.input`
+  width: 400px;
+  height: auto;
+  background-color: transparent;
+  padding: 2px 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #000;
+  text-align: start !important;
+  line-height: 25px;
   border: none;
+  outline: none;
   @media screen and (max-width: 545px) {
     width: 90%;
-    height: 50px;
+    /* height: 50px; */
+    line-height: 35px;
   }
 
-  &:hover {
+  /* &:hover {
     outline: 1px solid #fff;
   }
   &:focus {
     outline: 1px solid #000000;
-  }
+  } */
+`;
+// export Task
+
+export const TaskButton = styled.button`
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #000000;
+`;
+export const TaskRemoveButton = styled(TaskButton)`
+  border: 2px solid #df0000;
 `;
 
 export default TaskContainer;

@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import { useState } from "react";
 import Navbar from "./navbar";
 
 import { ContainerMain, Container } from "./index.styled";

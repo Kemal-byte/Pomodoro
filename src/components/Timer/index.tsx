@@ -14,7 +14,7 @@ export default ({ state, dispatch }) => {
   };
 
   const handleStart = () => {
-    console.log(timerHook.checkInputs());
+    // console.log(timerHook.checkInputs());
     if (!timerHook.checkInputs()) {
       dispatch({ type: "started_timer", payload: !state.started });
       audio.play();
