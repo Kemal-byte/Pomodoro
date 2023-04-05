@@ -42,15 +42,9 @@ export const TaskStyled = styled.div`
   ${TaskBaseStyles}
 `;
 export const TaskInput = styled.input`
+  ${TaskBaseStyles}
   width: 400px;
   height: auto;
-  background-color: transparent;
-  padding: 2px 10px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #000;
-  text-align: start !important;
-  line-height: 25px;
   border: none;
   outline: none;
   @media screen and (max-width: 545px) {
@@ -66,17 +60,29 @@ export const TaskInput = styled.input`
     outline: 1px solid #000000;
   } */
 `;
-// export Task
 
 export const TaskButton = styled.button`
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   cursor: pointer;
-  border: 2px solid #000000;
+  /* padding: 0.5px; */
+  &:hover {
+    outline: solid 2px #2c2713;
+  }
+  > img {
+    margin: auto auto;
+    padding: 0;
+    width: 70%;
+  }
+  border: none;
 `;
-export const TaskRemoveButton = styled(TaskButton)`
-  border: 2px solid #df0000;
+export const TaskRemoveButton = styled.button`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
 `;
 
 export default TaskContainer;

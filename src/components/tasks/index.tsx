@@ -5,6 +5,8 @@ import TaskContainer, {
   TaskWrapper,
 } from "./index.styled";
 import TaskItem from "./TaskItem";
+import Cross from "@/assets/Cross.svg";
+
 const TaskComponent = () => {
   const [todoList, setTodoList] = useState(
     () => JSON.parse(localStorage.getItem("todoList")) || []
@@ -34,7 +36,9 @@ const TaskComponent = () => {
   return (
     <TaskContainer>
       <TaskWrapper>
-        <TaskButton onClick={() => addTask(task)} />
+        <TaskButton onClick={() => addTask(task)}>
+          <img src={Cross} alt="" />
+        </TaskButton>
         <TaskInput
           placeholder="✅ Add a new task"
           value={task}
