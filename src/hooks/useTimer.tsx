@@ -125,5 +125,3 @@ const useTimer = (state: StateType, dispatch: DispatchType) => {
 };
 
 export default useTimer;
-
-//Maybe write this in a useReducer function
