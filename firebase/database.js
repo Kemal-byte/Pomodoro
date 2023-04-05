@@ -74,7 +74,6 @@ export function yearlyData(data, userId) {
 }
 
 export const dataReader = () => {
-  console.log(globalUser);
   if (!globalUser) return Promise.reject(new Error("No global user"));
   const userRef = ref(db, `users/${globalUser}/2023`);
   return new Promise((resolve, reject) => {
@@ -92,7 +91,6 @@ export const dataReader = () => {
 };
 
 export const addNewTag = (tag) => {
-  console.log("Inside add new tag", tag);
   const userRef = ref(db, `users/${globalUser}`);
   let updates = {};
   updates = {

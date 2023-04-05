@@ -7,7 +7,6 @@ export default ({ graph, setGraph, setSettings, settings }) => {
   const handleGraph = (e) => {
     const { id } = e.target;
     //TODO: Depending on which navbar button is clicked toggle between different components.
-    // console.log(id);
     if (id === "chart") {
       setSettings(false);
       setGraph(!graph);

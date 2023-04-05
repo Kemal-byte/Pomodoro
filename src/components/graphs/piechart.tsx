@@ -20,7 +20,6 @@ const PieComponent = ({ timeFrame, cleanData }) => {
     "#10b981",
   ];
   useEffect(() => {
-    console.log(localState);
     if (timeFrame === "weekly") {
       setLocalState(cleanData?.weeklyPie);
     } else if (timeFrame === "monthly") {
@@ -29,7 +28,6 @@ const PieComponent = ({ timeFrame, cleanData }) => {
       setLocalState(cleanData?.yearlyPie);
     }
   }, [timeFrame, cleanData]);
-  console.log(localState);
   if (!localState) {
     return <div>Loading...</div>;
   }

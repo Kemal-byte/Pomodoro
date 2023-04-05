@@ -9,7 +9,6 @@ export default ({ state, dispatch }) => {
   const [tags, setTags] = useState(["Study", "Reading", "Math", "Gym"]);
 
   const handleChange = (tip: string, val: any) => {
-    console.log(state);
     dispatch({ type: tip, payload: val });
   };
 
@@ -25,7 +24,6 @@ export default ({ state, dispatch }) => {
     async function updateTags() {
       const data = await readTags();
       for (let key in data) {
-        console.log(key);
         if (!tags.includes(key)) {
           setTags((prev) => [...prev, key]);
         }

@@ -57,7 +57,6 @@ const useTimer = (state: StateType, dispatch: DispatchType) => {
 
   useEffect(() => {
     if (onBreak) {
-      NotifySuccess(true);
       setTimeLeft(state.break * 60);
     } else {
       if (state.started) {

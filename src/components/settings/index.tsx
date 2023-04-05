@@ -19,7 +19,6 @@ import { addNewTag } from "../../../firebase/database";
 import { Button } from "@mui/material";
 
 export default () => {
-  console.log(globalUser);
   //TODO: Auto-Start, Sound settings, Colors
   const [auto, setAuto] = useState(true);
   const [newTag, setNewTag] = useState("");
@@ -31,7 +30,6 @@ export default () => {
     if (newTag !== "") {
       addNewTag(newTag);
     }
-    // updateColors(combinations[colorComb]);
   };
 
   return (

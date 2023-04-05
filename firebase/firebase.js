@@ -29,7 +29,6 @@ export const db = getDatabase(
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    console.log(user);
     globalUser = user.uid;
   } else {
     globalUser = "";

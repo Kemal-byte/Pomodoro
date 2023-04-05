@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BarChart } from "@tremor/react";
-import { Box, Skeleton } from "@mui/material";
-import SkeletonTypography from "./skeleton";
 
 export default ({ timeFrame, cleanData }) => {
   const [localState, setLocalState] = useState(cleanData[timeFrame]);
@@ -9,7 +7,6 @@ export default ({ timeFrame, cleanData }) => {
     dataKey: "week",
     categories: ["duration"],
   });
-  console.log(cleanData);
 
   useEffect(() => {
     if (!cleanData) return;
@@ -25,7 +22,6 @@ export default ({ timeFrame, cleanData }) => {
     }
   }, [timeFrame, cleanData]);
 
-  console.log(localState);
   return (
     <BarChart
       data={localState}

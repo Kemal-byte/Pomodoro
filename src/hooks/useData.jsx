@@ -111,7 +111,6 @@ const useData = () => {
     let holder;
     try {
       const data = await weeklyData();
-      console.log("%%%%%%%%%%%%%%%%", data);
       holder = data?.filter(
         (item) =>
           item.dayName !== "weeklyCategories" && item.dayName !== "weeklyTotal"
