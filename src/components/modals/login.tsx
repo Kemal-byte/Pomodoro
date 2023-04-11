@@ -8,11 +8,10 @@ import styled from "@emotion/styled";
 import Colors from "../../utilities/commonCss/colors";
 import createUser from "../../../firebase/createAccount";
 import signIn, { logOut } from "../../../firebase/loginUser";
-// import userHook from "../../hooks/userHook";
 import style from "./style.js";
 import { globalUser } from "../../../firebase/firebase";
 import ToastifyNotification from "../../utilities/popup";
-
+// @ts-ignore
 const LoginInput = styled(TextField, {
   name: "InputFields",
 })({ width: "100% !important" });
@@ -38,7 +37,6 @@ export default function BasicModal() {
     }
   };
   const LoginHandle = async () => {
-    console.log("globalUser", globalUser);
     if (globalUser) {
       logOut();
       handleClose();
@@ -48,7 +46,6 @@ export default function BasicModal() {
       if (asd) {
         handleClose();
       }
-      console.log("asd", asd);
     }
   };
   const RegisterHandle = () => {

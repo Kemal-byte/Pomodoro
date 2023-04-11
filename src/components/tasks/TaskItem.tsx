@@ -1,11 +1,9 @@
-import { Typography } from "@mui/material";
 import { TaskRemoveButton, TaskStyled, TaskWrapper } from "./index.styled";
 import Circle from "@/assets/Circle.svg";
 const TaskItem = ({ index, task, onRemove }) => {
   const handleRemove = () => {
     onRemove(index);
   };
-  console.log("Inside the racoon", task);
 
   return (
     <TaskWrapper>
