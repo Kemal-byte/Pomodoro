@@ -48,5 +48,13 @@ export const VideoWrapper = styled.div`
   min-width: 300px;
   height: 100%;
 `;
+export const BoxIconWrapper = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+export const Icons = styled.div`
+  width: 45px;
+  height: auto;
+`;
 
 export default WelcomePage;

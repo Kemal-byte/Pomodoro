@@ -1,11 +1,14 @@
-import { Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import WelcomePage, {
   WelcomeContainer,
   WelcomeColumn,
   YouTubeVideo,
   VideoWrapper,
+  BoxIconWrapper,
+  Icons,
 } from "./index.styled";
-
+import ProgressIcon from "@/assets/graphIcon.png";
+import EasyIcon from "@/assets/easyIcon.png";
 export default () => {
   const videoURL =
     "https://www.youtube.com/watch?v=KRaWnd3LJfs&ab_channel=Maroon5VEVO";
@@ -14,7 +17,13 @@ export default () => {
       <Container>
         <WelcomeContainer>
           <WelcomeColumn>
-            <Typography variant="h4">Easy to use</Typography>
+            <BoxIconWrapper>
+              <Icons>
+                <img src={EasyIcon} alt="A progress icon" />
+              </Icons>
+              <Typography variant="h4">Easy to use</Typography>
+            </BoxIconWrapper>
+
             <Typography>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod
               explicabo eligendi ipsa rem saepe dicta perspiciatis magnam
@@ -23,7 +32,12 @@ export default () => {
             </Typography>
           </WelcomeColumn>
           <WelcomeColumn>
-            <Typography variant="h4">See your progress</Typography>
+            <BoxIconWrapper>
+              <Icons>
+                <img src={ProgressIcon} alt="A progress icon" />
+              </Icons>
+              <Typography variant="h4">See your progress</Typography>
+            </BoxIconWrapper>
             <Typography>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod
               explicabo eligendi ipsa rem saepe dicta perspiciatis magnam
