@@ -8,6 +8,7 @@ import Blob1 from "../assets/Blob1.svg";
 import Blob2 from "../assets/Blob2.svg";
 import Main from "./Main";
 import WelcomeSection from "./welcome";
+import Footer from "./footer";
 
 export default () => {
   const [graph, setGraph] = useState(false);
@@ -48,6 +49,7 @@ export default () => {
         </Box>
       </ContainerMain>
       <WelcomeSection />
+      <Footer />
     </>
   );
 };
