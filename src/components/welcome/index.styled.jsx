@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const WelcomePage = styled.section`
+  padding-top: 6rem;
   width: 100%;
   min-height: 100vh;
   background-color: #f8f8f8;
@@ -22,10 +23,13 @@ export const WelcomeColumn = styled.div`
   padding: 2rem;
   background-color: #fff;
   border-radius: 0.5rem;
-  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.1);
-
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease-in-out;
   &:first-child {
     background-color: #b02b2b;
+  }
+  &:hover {
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.1);
   }
 `;
 
