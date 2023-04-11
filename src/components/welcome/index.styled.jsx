@@ -26,7 +26,7 @@ export const WelcomeColumn = styled.div`
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
   transition: all 0.4s ease-in-out;
   &:first-child {
-    background-color: #b02b2b;
+    background-color: #e93030;
   }
   &:hover {
     box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.1);
@@ -35,7 +35,6 @@ export const WelcomeColumn = styled.div`
 
 export const YouTubeVideo = styled.div`
   grid-column: 1 / span 2;
-  /* max-height: 400px; */
   width: 100%;
   min-height: 400px;
   @media screen and (max-width: 768px) {
