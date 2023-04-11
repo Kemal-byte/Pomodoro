@@ -19,7 +19,7 @@ export default () => {
       <ContainerMain>
         <Box
           sx={{
-            position: "fixed",
+            position: "absolute",
             top: "0px",
             zIndex: "2",
             pointerEvents: "none",
@@ -38,7 +38,7 @@ export default () => {
         </Container>
         <Box
           sx={{
-            position: "fixed",
+            position: "absolute",
             bottom: "0px",
             right: "0px",
             zIndex: "2",
