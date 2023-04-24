@@ -14,7 +14,7 @@ This is a simple pomodoro app. It will be easy to use easy to track the number o
 
 - On the login modal, I can't focus on the don't have an account text using tab index
 - When the user plays with the timer, it triggers popup on 0. It should only be populated after focus sessions.
-
+- When build dist folder was upload to the gh-pages subtree it wasn't working. It showed an empty page. To fix it I wrote the base: './' in the vite.confige.tes file. That fixed the problem.
 - When I was hovering over the position:fixed elements it didn't let me scroll, Solution was to add a new css property to position fixed elements,
   which is pointerEvents: "none"
 
